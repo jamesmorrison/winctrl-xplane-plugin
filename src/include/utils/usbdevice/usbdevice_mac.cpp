@@ -26,7 +26,7 @@ bool USBDevice::connect() {
             throw std::system_error(std::make_error_code(std::errc::io_error), std::string("IOHIDDeviceOpen failed: ") + std::to_string(result));
         }
     } catch (const std::exception &ex) {
-        debug("Failed to open HID device: %s\nError: %s\n", productName.c_str(), ex.what());
+        Logger::getInstance()->debug("Failed to open HID device: %s\nError: %s\n", productName.c_str(), ex.what());
         hidDevice = nullptr;
         return false;
     }
@@ -123,7 +123,7 @@ void USBDevice::forceStateSync() {
 
 bool USBDevice::writeData(std::vector<uint8_t> data) {
     if (!hidDevice || !connected || data.empty()) {
-        debug("HID device not open, not connected, or empty data\n");
+        Logger::getInstance()->debug("HID device not open, not connected, or empty data\n");
         return false;
     }
 
@@ -164,7 +164,7 @@ void USBDevice::writeThreadLoop() {
             uint8_t reportID = data[0];
             IOReturn kr = IOHIDDeviceSetReport(hidDevice, kIOHIDReportTypeOutput, reportID, data.data(), data.size());
             if (kr != kIOReturnSuccess) {
-                debug("IOHIDDeviceSetReport failed: %d\n", kr);
+                Logger::getInstance()->debug("IOHIDDeviceSetReport failed: %d\n", kr);
             }
         }
     }

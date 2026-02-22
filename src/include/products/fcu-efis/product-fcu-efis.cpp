@@ -448,8 +448,6 @@ void ProductFCUEfis::setLedBrightness(FCUEfisLed led, uint8_t brightness) {
 
     if (!data.empty()) {
         writeData(data);
-    } else {
-        debug("No LED data generated for LED %d\n", ledValue);
     }
 }
 

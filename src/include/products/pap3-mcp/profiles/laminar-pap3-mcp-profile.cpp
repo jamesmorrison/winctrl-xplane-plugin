@@ -11,7 +11,7 @@
 #include <XPLMUtilities.h>
 
 LaminarPAP3MCPProfile::LaminarPAP3MCPProfile(ProductPAP3MCP *product) : PAP3MCPAircraftProfile(product) {
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](const std::vector<float> &brightness) {
         if (brightness.size() >= 16) {
             bool hasPower = Dataref::getInstance()->get<bool>("sim/cockpit2/autopilot/autopilot_has_power");
             uint8_t target = hasPower ? brightness[15] * 255 : 0;

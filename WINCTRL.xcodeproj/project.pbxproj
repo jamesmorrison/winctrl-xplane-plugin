@@ -216,6 +216,7 @@
 		F6AF9EC52D078DB000530297 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		F6AF9ECA2D078ED400530297 /* appstate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = appstate.h; sourceTree = "<group>"; };
 		F6AF9ECB2D078ED400530297 /* appstate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = appstate.cpp; sourceTree = "<group>"; };
+		F6B79CFC2F4A5BFD00517E6A /* logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = logger.hpp; sourceTree = "<group>"; };
 		F6BB75712E32634700C2B21F /* toliss-fcu-efis-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toliss-fcu-efis-profile.h"; sourceTree = "<group>"; };
 		F6BB75722E32634700C2B21F /* toliss-fcu-efis-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "toliss-fcu-efis-profile.cpp"; sourceTree = "<group>"; };
 		F6BB75742E32634700C2B21F /* fcu-efis-aircraft-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "fcu-efis-aircraft-profile.h"; sourceTree = "<group>"; };
@@ -475,6 +476,7 @@
 				F6C248452EBE498500617E89 /* plugins-menu.cpp */,
 				F6A77E772ED3620600061D03 /* segment-display.h */,
 				F6A77E782ED3620600061D03 /* segment-display.cpp */,
+				F6B79CFC2F4A5BFD00517E6A /* logger.hpp */,
 			);
 			path = utils;
 			sourceTree = "<group>";

@@ -276,7 +276,7 @@ void ProductFMC::didReceiveButton(uint16_t hardwareButtonIndex, bool pressed, ui
     FMCKey key = FMCHardwareMapping::ButtonIdentifierForIndex(hardwareType, hardwareButtonIndex);
     if (key == FMCKey::INVALID_UNKNOWN) {
         // For reference, we often get: [WINCTRL] Received unknown key from hardwareType 1 - hardwareButtonIndex: 207
-        debug("Received unknown key from hardwareType %i - hardwareButtonIndex: %i\n", (int) hardwareType, hardwareButtonIndex);
+        Logger::getInstance()->debug("Received unknown key from hardwareType %i - hardwareButtonIndex: %i\n", (int) hardwareType, hardwareButtonIndex);
         return;
     }
 
@@ -364,15 +364,15 @@ std::pair<uint8_t, uint8_t> ProductFMC::dataFromColFont(char color, bool fontSma
 
 void ProductFMC::writeLineToPage(std::vector<std::vector<char>> &page, int line, int pos, const std::string &text, char color, bool fontSmall) {
     if (line < 0 || line >= ProductFMC::PageLines) {
-        debug("Not writing line %i: Line number is out of range!\n", line);
+        Logger::getInstance()->debug("Not writing line %i: Line number is out of range!\n", line);
         return;
     }
     if (pos < 0 || pos + text.length() > ProductFMC::PageCharsPerLine) {
-        debug("Not writing line %i: Position number (%i) is out of range!\n", line, pos);
+        Logger::getInstance()->debug("Not writing line %i: Position number (%i) is out of range!\n", line, pos);
         return;
     }
     if (text.length() > ProductFMC::PageCharsPerLine) {
-        debug("Not writing line %i: Text is too long (%lu) for line.\n", line, text.length());
+        Logger::getInstance()->debug("Not writing line %i: Text is too long (%lu) for line.\n", line, text.length());
         return;
     }
 
@@ -410,7 +410,7 @@ void ProductFMC::setFont(FontVariant preferredVariant) {
     preferredFontVariant = preferredVariant;
     bool shouldLoadDefaultFont = fontPreference == "default";
     if (!shouldLoadDefaultFont && !Font::IsCustomFontAvailable(fontPreference)) {
-        debug_force("Font file not found for font '%s'\n", fontPreference.c_str());
+        Logger::getInstance()->error("Font file not found for font '%s'\n", fontPreference.c_str());
         AppState::getInstance()->writePreference("FMCFont", "default");
         shouldLoadDefaultFont = true;
     }
@@ -423,7 +423,7 @@ void ProductFMC::setFont(FontVariant preferredVariant) {
     }
 
     if (font.empty()) {
-        debug_force("Failed to load font data for font '%s'\n", fontPreference.c_str());
+        Logger::getInstance()->error("Failed to load font data for font '%s'\n", fontPreference.c_str());
         AppState::getInstance()->writePreference("FMCFont", "default");
         return;
     }

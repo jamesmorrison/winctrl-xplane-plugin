@@ -25,7 +25,6 @@ class AppState {
         static float Update(float inElapsedSinceLastCall, float inElapsedTimeSinceLastFlightLoop, int inCounter, void *inRefcon);
 
         bool pluginInitialized;
-        bool debuggingEnabled;
 
         static AppState *getInstance();
         bool initialize();

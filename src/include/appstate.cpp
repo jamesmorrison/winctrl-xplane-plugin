@@ -13,7 +13,6 @@ AppState *AppState::instance = nullptr;
 
 AppState::AppState() {
     pluginInitialized = false;
-    debuggingEnabled = false;
 }
 
 AppState::~AppState() {
@@ -44,12 +43,12 @@ bool AppState::initialize() {
                 return;
             }
 
-            debug_force("Disconnecting all devices via debug command...\n");
+            Logger::getInstance()->info("Disconnecting all devices via debug command...\n");
             USBController::getInstance()->disconnectAllDevices();
         });
 #endif
 
-    debug_force("Plugin initialized.\n");
+    Logger::getInstance()->info("Plugin initialized.\n");
     return true;
 }
 
@@ -58,7 +57,7 @@ void AppState::deinitialize() {
         return;
     }
 
-    debug_force("Plugin deinitializing...\n");
+    Logger::getInstance()->info("Plugin deinitializing...\n");
     XPLMUnregisterFlightLoopCallback(AppState::Update, nullptr);
 
     USBController::getInstance()->destroy();
@@ -151,7 +150,7 @@ void AppState::writePreference(const std::string &key, const std::string &value)
 
     rc = ini.SaveFile((getPluginDirectory() + "/preferences.ini").c_str());
     if (rc < 0) {
-        debug_force("Failed to save preferences file.\n");
+        Logger::getInstance()->info("Failed to save preferences file.\n");
     }
 }
 

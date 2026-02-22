@@ -38,7 +38,7 @@ RotateMD11FMCProfile::RotateMD11FMCProfile(ProductFMC *product) : FMCAircraftPro
     });
 
     // MSG light - monitor int array dataref and use first value
-    Dataref::getInstance()->monitorExistingDataref<std::vector<int>>("Rotate/aircraft/systems/mcdu_msg_lt", [product](std::vector<int> msgLights) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<int>>("Rotate/aircraft/systems/mcdu_msg_lt", [product](const std::vector<int> &msgLights) {
         bool msgEnabled = !msgLights.empty() && msgLights[0] > 0;
         product->setLedBrightness(FMCLed::PFP_MSG, msgEnabled ? 1 : 0);
         product->setLedBrightness(FMCLed::MCDU_MCDU, msgEnabled ? 1 : 0);

@@ -35,13 +35,13 @@ bool USBDevice::connect() {
         HIDP_CAPS caps;
         if (HidP_GetCaps(preparsedData, &caps) == HIDP_STATUS_SUCCESS) {
             outputReportByteLength = caps.OutputReportByteLength;
-            debug("Output report byte length: %u\n", outputReportByteLength);
+            Logger::getInstance()->debug("Output report byte length: %u\n", outputReportByteLength);
         } else {
-            debug_force("Failed to get HID capabilities\n");
+            Logger::getInstance()->error("Failed to get HID capabilities\n");
         }
         HidD_FreePreparsedData(preparsedData);
     } else {
-        debug_force("Failed to get preparsed data\n");
+        Logger::getInstance()->error("Failed to get preparsed data\n");
     }
 
     connected = true;
@@ -90,7 +90,7 @@ void USBDevice::InputReportCallback(void *context, DWORD bytesRead, uint8_t *rep
     } catch (const std::system_error &e) {
         return;
     } catch (...) {
-        debug_force("Unexpected exception in InputReportCallback\n");
+        Logger::getInstance()->error("Unexpected exception in InputReportCallback\n");
         return;
     }
 }
@@ -134,12 +134,12 @@ void USBDevice::forceStateSync() {
 
 bool USBDevice::writeData(std::vector<uint8_t> data) {
     if (hidDevice == INVALID_HANDLE_VALUE || !connected || data.empty()) {
-        debug("HID device not open, not connected, or empty data\n");
+        Logger::getInstance()->debug("HID device not open, not connected, or empty data\n");
         return false;
     }
 
     if (data.size() > 1024) {
-        debug_force("Data size too large: %zu bytes\n", data.size());
+        Logger::getInstance()->error("Data size too large: %zu bytes\n", data.size());
         return false;
     }
 
@@ -191,7 +191,7 @@ void USBDevice::writeThreadLoop() {
                 } else if (error == ERROR_IO_DEVICE) {
                     errorName = "IO_DEVICE";
                 }
-                debug_force("WriteFile failed for %s (vendorId: 0x%04X, productId: 0x%04X): %lu (%s)\n",
+                Logger::getInstance()->error("WriteFile failed for %s (vendorId: 0x%04X, productId: 0x%04X): %lu (%s)\n",
                     productName.empty() ? "Unknown" : productName.c_str(), vendorId, productId, error, errorName);
             }
         }

@@ -27,7 +27,7 @@ TolissECAM32Profile::TolissECAM32Profile(ProductECAM32 *product) : ECAM32Aircraf
         Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/OHPLightsATA31_Raw");
     });
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/OHPLightsATA31_Raw", [product](std::vector<float> panelLights) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/OHPLightsATA31_Raw", [product](const std::vector<float> &panelLights) {
         if (panelLights.size() < 45) {
             return;
         }

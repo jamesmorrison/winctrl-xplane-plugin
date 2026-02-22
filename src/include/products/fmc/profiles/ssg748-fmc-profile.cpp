@@ -14,7 +14,7 @@ SSG748FMCProfile::SSG748FMCProfile(ProductFMC *product) : FMCAircraftProfile(pro
     product->setAllLedsEnabled(false);
     product->setFont(FontVariant::FontVGA1);
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("ssg/LGT/mcdu_brt_sw", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("ssg/LGT/mcdu_brt_sw", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 27) {
             return;
         }

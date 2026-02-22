@@ -17,7 +17,7 @@ __attribute__((weak)) void notifyButtonPressed(uint16_t buttonId, uint16_t produ
 
 USBDevice *USBDevice::Device(HIDDeviceHandle hidDevice, uint16_t vendorId, uint16_t productId, std::string vendorName, std::string productName) {
     if (vendorId != WINCTRL_VENDOR_ID) {
-        debug("Vendor ID mismatch: 0x%04X != 0x%04X\n", vendorId, WINCTRL_VENDOR_ID);
+        Logger::getInstance()->debug("Vendor ID mismatch: 0x%04X != 0x%04X\n", vendorId, WINCTRL_VENDOR_ID);
         return nullptr;
     }
 
@@ -123,7 +123,7 @@ USBDevice *USBDevice::Device(HIDDeviceHandle hidDevice, uint16_t vendorId, uint1
             return new ProductUrsaMinorThrottle(hidDevice, vendorId, productId, vendorName, productName);
 
         default:
-            debug("Unknown WINCTRL device - vendorId: 0x%04X, productId: 0x%04X (%s)\n", vendorId, productId, productName.c_str());
+            Logger::getInstance()->debug("Unknown WINCTRL device - vendorId: 0x%04X, productId: 0x%04X (%s)\n", vendorId, productId, productName.c_str());
             return nullptr;
     }
 }

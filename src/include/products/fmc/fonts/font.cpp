@@ -23,7 +23,7 @@ const std::vector<std::vector<unsigned char>> Font::GlyphData(std::string filena
     std::filesystem::path fontFile = std::filesystem::path(pluginDirectory) / "fonts" / filename;
     std::ifstream file(fontFile, std::ios::binary);
     if (!file) {
-        debug_force("Could not open custom font file: %s\n", fontFile.c_str());
+        Logger::getInstance()->error("Could not open custom font file: %s\n", fontFile.c_str());
         return {};
     }
 
@@ -39,7 +39,7 @@ const std::vector<std::vector<unsigned char>> Font::GlyphData(std::string filena
         if (file.read(reinterpret_cast<char *>(glyphData.data()), lengthByte)) {
             result.push_back(glyphData);
         } else {
-            debug_force("Failed to read glyph data from file: %s\n", fontFile.c_str());
+            Logger::getInstance()->error("Failed to read glyph data from file: %s\n", fontFile.c_str());
             break;
         }
     }
@@ -102,10 +102,10 @@ const std::vector<std::string> Font::ReadCustomFontFiles() {
                 }
             }
         } else {
-            debug_force("Fonts directory does not exist: %s\n", fontsDirectory.c_str());
+            Logger::getInstance()->error("Fonts directory does not exist: %s\n", fontsDirectory.c_str());
         }
     } catch (const std::filesystem::filesystem_error &e) {
-        debug_force("Error reading fonts directory: %s\n", e.what());
+        Logger::getInstance()->error("Error reading fonts directory: %s\n", e.what());
     }
 
     return fontFiles;

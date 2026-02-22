@@ -12,7 +12,7 @@
 #include <XPLMUtilities.h>
 
 LaminarFCUEfisProfile::LaminarFCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 2) {
             return;
         }

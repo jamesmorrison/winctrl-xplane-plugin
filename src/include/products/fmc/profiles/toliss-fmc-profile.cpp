@@ -13,7 +13,7 @@ TolissFMCProfile::TolissFMCProfile(ProductFMC *product) : FMCAircraftProfile(pro
     product->setAllLedsEnabled(false);
     product->setFont(FontVariant::FontAirbus);
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/MCDUIntegBrightness_Raw", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/MCDUIntegBrightness_Raw", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 2) {
             return;
         }
@@ -23,7 +23,7 @@ TolissFMCProfile::TolissFMCProfile(ProductFMC *product) : FMCAircraftProfile(pro
         product->setLedBrightness(FMCLed::BACKLIGHT, backlightBrightness);
     });
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/DUBrightness", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/DUBrightness", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 8) {
             return;
         }
@@ -66,7 +66,7 @@ TolissFMCProfile::TolissFMCProfile(ProductFMC *product) : FMCAircraftProfile(pro
         product->setAllLedsEnabled(annunMode == 2);
     });
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/DUSelfTestTimeLeft", [this, product](std::vector<float> selfTestSecondsRemaining) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/DUSelfTestTimeLeft", [this, product](const std::vector<float> &selfTestSecondsRemaining) {
         if (selfTestSecondsRemaining.size() < 8) {
             return;
         }

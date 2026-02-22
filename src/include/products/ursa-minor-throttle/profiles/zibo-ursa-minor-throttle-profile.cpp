@@ -8,7 +8,7 @@
 #include <cmath>
 
 ZiboUrsaMinorThrottleProfile::ZiboUrsaMinorThrottleProfile(ProductUrsaMinorThrottle *product) : UrsaMinorThrottleAircraftProfile(product) {
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/electric/panel_brightness", [this, product](std::vector<float> panelBrightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/electric/panel_brightness", [this, product](const std::vector<float> &panelBrightness) {
         if (panelBrightness.size() < 4) {
             return;
         }
@@ -32,7 +32,7 @@ ZiboUrsaMinorThrottleProfile::ZiboUrsaMinorThrottleProfile(ProductUrsaMinorThrot
         product->forceStateSync();
     });
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/dspl_light_test", [this](std::vector<float> displayTest) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/dspl_light_test", [this](const std::vector<float> &displayTest) {
         Dataref::getInstance()->executeChangedCallbacksForDataref("laminar/B738/electric/panel_brightness");
     });
 

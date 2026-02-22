@@ -12,7 +12,7 @@
 #include <XPLMUtilities.h>
 
 FF350FCUEfisProfile::FF350FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/SupplLightLevelRehostats", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/SupplLightLevelRehostats", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 2) {
             return;
         }

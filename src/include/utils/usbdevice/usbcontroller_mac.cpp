@@ -1,4 +1,5 @@
 #if APL
+
 #include "appstate.h"
 #include "config.h"
 #include "usbcontroller.h"
@@ -12,7 +13,7 @@ USBController *USBController::instance = nullptr;
 USBController::USBController() {
     hidManager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
     if (CFGetTypeID(hidManager) != IOHIDManagerGetTypeID()) {
-        debug_force("Failed to create IOHIDManager\n");
+        Logger::getInstance()->error("Failed to create IOHIDManager\n");
         return;
     }
 

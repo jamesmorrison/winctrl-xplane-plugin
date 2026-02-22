@@ -12,7 +12,7 @@
 #include <XPLMUtilities.h>
 
 TolissFCUEfisProfile::TolissFCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/SupplLightLevelRehostats", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/SupplLightLevelRehostats", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 2) {
             return;
         }
@@ -47,7 +47,7 @@ TolissFCUEfisProfile::TolissFCUEfisProfile(ProductFCUEfis *product) : FCUEfisAir
         Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/ATHRmode");
         Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/LOCilluminated");
         Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/APPRilluminated");
-        Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/APVerticalMode");
+        Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/OHPLightsATA31_Raw");
 
         Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/FD2Engage");
         Dataref::getInstance()->executeChangedCallbacksForDataref("AirbusFBW/ILSonFO");
@@ -90,16 +90,14 @@ TolissFCUEfisProfile::TolissFCUEfisProfile(ProductFCUEfis *product) : FCUEfisAir
         product->setLedBrightness(FCUEfisLed::APPR_GREEN, illuminated || isAnnunTest() ? 1 : 0);
     });
 
-    Dataref::getInstance()->monitorExistingDataref<int>("AirbusFBW/APVerticalMode", [this, product](int vsMode) {
-        /*0=SRS, 1=CLB, 2=DES, 3=ALT CST*, 4=ALT CST, 6=G/S*, 7=G/S, 8=FINAL, 10=FLARE, 11=LAND; 101=OP CLB, 102=OP DES, 103=ALT*, 104=ALT, 105: ALT CRZ, 107=V/S or FPA, 112: EXP CLB, 113: EXP DES*/
-        static const std::string icao = Dataref::getInstance()->get<std::string>("sim/aircraft/view/acf_ICAO");
-        static const std::set<std::string> expedButtonIcaos = {"A318", "A319", "A320", "A321", "A19N", "A20N",
-            "A21N"};
-        bool expedButtonAvailable = expedButtonIcaos.count(icao) > 0;
-        bool isExpedMode = expedButtonAvailable && (vsMode == 112 || vsMode == 113);
-        bool isAltMode = !expedButtonAvailable && (vsMode == 104 || vsMode == 105);
-        bool illuminated = isExpedMode || isAltMode;
-        product->setLedBrightness(FCUEfisLed::EXPED_GREEN, illuminated || isAnnunTest() ? 1 : 0);
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("AirbusFBW/OHPLightsATA31_Raw", [this, product](const std::vector<float> &panelLights) {
+        if (panelLights.size() < 52) {
+            return;
+        }
+
+        bool isExpedMode = panelLights[49] > 0;  // EXPED Light (A319, A320, A321)
+        bool isAltMode339 = panelLights[51] > 0; // ALT Light (A330, A340, A350, A380)
+        product->setLedBrightness(FCUEfisLed::EXPED_GREEN, isExpedMode || isAltMode339);
     });
 
     // Monitor EFIS Right (Captain) LED states
@@ -172,7 +170,7 @@ TolissFCUEfisProfile::~TolissFCUEfisProfile() {
     Dataref::getInstance()->unbind("AirbusFBW/ATHRmode");
     Dataref::getInstance()->unbind("AirbusFBW/LOCilluminated");
     Dataref::getInstance()->unbind("AirbusFBW/APPRilluminated");
-    Dataref::getInstance()->unbind("AirbusFBW/APVerticalMode");
+    Dataref::getInstance()->unbind("AirbusFBW/OHPLightsATA31_Raw");
 
     // Unbind EFIS Right datarefs
     Dataref::getInstance()->unbind("AirbusFBW/FD2Engage");

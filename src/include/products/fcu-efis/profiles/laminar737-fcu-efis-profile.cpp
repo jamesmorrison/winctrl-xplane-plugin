@@ -13,7 +13,7 @@
 
 Laminar737FCUEfisProfile::Laminar737FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
     // Monitor power and brightness
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/panel_brightness_ratio", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/panel_brightness_ratio", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 4) {
             return;
         }

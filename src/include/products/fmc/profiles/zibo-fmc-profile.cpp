@@ -15,7 +15,7 @@ ZiboFMCProfile::ZiboFMCProfile(ProductFMC *product) : FMCAircraftProfile(product
     product->setAllLedsEnabled(false);
     product->setFont(FontVariant::Font737);
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/electric/instrument_brightness", [product](std::vector<float> screenBrightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/electric/instrument_brightness", [product](const std::vector<float> &screenBrightness) {
         if (screenBrightness.size() < 11) {
             return;
         }
@@ -24,7 +24,7 @@ ZiboFMCProfile::ZiboFMCProfile(ProductFMC *product) : FMCAircraftProfile(product
         product->setLedBrightness(FMCLed::SCREEN_BACKLIGHT, target);
     });
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/electric/panel_brightness", [product](std::vector<float> panelBrightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("laminar/B738/electric/panel_brightness", [product](const std::vector<float> &panelBrightness) {
         if (panelBrightness.size() < 4) {
             return;
         }

@@ -39,7 +39,7 @@ bool USBDevice::connect() {
                 InputReportCallback(this, (int) bytesRead, buffer);
             } else if (bytesRead < 0) {
                 // Device error or disconnected
-                debug_force("Read failed with error: %d\n", errno);
+                Logger::getInstance()->error("Read failed with error: %d\n", errno);
                 break;
             } else if (bytesRead == 0) {
                 // EOF - device disconnected
@@ -49,7 +49,7 @@ bool USBDevice::connect() {
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
 
-        debug("Input thread exiting\n");
+        Logger::getInstance()->debug("Input thread exiting\n");
     });
     inputThread.detach();
 
@@ -109,7 +109,7 @@ void USBDevice::disconnect() {
         inputBuffer = nullptr;
     }
 
-    debug("Device disconnected\n");
+    Logger::getInstance()->debug("Device disconnected\n");
 }
 
 void USBDevice::forceStateSync() {
@@ -118,7 +118,7 @@ void USBDevice::forceStateSync() {
 
 bool USBDevice::writeData(std::vector<uint8_t> data) {
     if (hidDevice < 0 || !connected || data.empty()) {
-        debug("HID device not open, not connected, or empty data\n");
+        Logger::getInstance()->debug("HID device not open, not connected, or empty data\n");
         return false;
     }
 
@@ -156,7 +156,7 @@ void USBDevice::writeThreadLoop() {
         if (!data.empty() && hidDevice >= 0 && connected) {
             ssize_t bytesWritten = write(hidDevice, data.data(), data.size());
             if (bytesWritten != (ssize_t) data.size()) {
-                debug_force("Raw write failed: %s (wrote %zd of %zu bytes)\n", strerror(errno), bytesWritten, data.size());
+                Logger::getInstance()->error("Raw write failed: %s (wrote %zd of %zu bytes)\n", strerror(errno), bytesWritten, data.size());
             }
         }
     }

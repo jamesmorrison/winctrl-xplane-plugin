@@ -9,18 +9,16 @@
 #include <cmath>
 #include <cstring>
 #include <iomanip>
-#include <XPLMUtilities.h>
 #include <XPLMProcessing.h>
+#include <XPLMUtilities.h>
 
 JF146FCUEfisProfile::JF146FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
-
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/panel_brightness_ratio", [product](std::vector<float> brightness) {
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/panel_brightness_ratio", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 4) {
             return;
         }
 
         bool hasPower = Dataref::getInstance()->get<bool>("sim/cockpit/electrical/battery_on");
-
 
         uint8_t target = hasPower ? brightness[0] * 255 : 0;
         product->setLedBrightness(FCUEfisLed::BACKLIGHT, target);
@@ -43,7 +41,6 @@ JF146FCUEfisProfile::JF146FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircr
         Dataref::getInstance()->executeChangedCallbacksForDataref("sim/cockpit2/electrical/panel_brightness_ratio");
     });
 
-
     Dataref::getInstance()->monitorExistingDataref<int>("sim/cockpit2/annunciators/autopilot", [product](int status) {
         product->setLedBrightness(FCUEfisLed::AP1_GREEN, status == 1 ? 255 : 0);
     });
@@ -60,9 +57,9 @@ JF146FCUEfisProfile::JF146FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircr
         product->setLedBrightness(FCUEfisLed::APPR_GREEN, status > 0 ? 255 : 0);
     });
 
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("thranda/TCAS/AnnLtA", [product](std::vector<float> lights) {
-         // Ensure cache is updated and trigger display update if needed
-         product->forceStateSync(); 
+    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("thranda/TCAS/AnnLtA", [product](const std::vector<float> &lights) {
+        // Ensure cache is updated and trigger display update if needed
+        product->forceStateSync();
     });
 }
 
@@ -98,8 +95,7 @@ const std::vector<std::string> &JF146FCUEfisProfile::displayDatarefs() const {
         "sim/cockpit2/gauges/indicators/mach_pilot",
         "sim/cockpit/autopilot/airspeed_is_mach",
         "thranda/TCAS/AnnLtA",
-        "sim/cockpit2/autopilot/glideslope_status"
-    };
+        "sim/cockpit2/autopilot/glideslope_status"};
 
     return datarefs;
 }
@@ -108,41 +104,44 @@ const std::unordered_map<uint16_t, FCUEfisButtonDef> &JF146FCUEfisProfile::butto
     static const std::unordered_map<uint16_t, FCUEfisButtonDef> buttons = {
         {0, {"SPD/MACH", "sim/autopilot/knots_mach_toggle"}},
         {1, {"LOC", "thranda/buttons/Button09"}}, // B LOC
-        {2, {"TRK", "sim/autopilot/trkfpa"}}, // unused?
+        {2, {"TRK", "sim/autopilot/trkfpa"}},     // unused?
         {3, {"AP1", "sim/autopilot/servos_toggle"}},
-        {4, {"AP2", ""}}, // unused?
-        {5, {"A/THR", "thranda/TMS/tmsPwrCmd"}}, // TMS on
-        {6, {"EXPED", ""}}, // unused - TMS?
-        {7, {"METRIC", ""}}, // unused
-        {8, {"APPR", "thranda/buttons/Button07"}}, // GSL button
-        {9, {"SPD DEC", "thranda/knob/RheostatDn104"}}, // SPD changed with SYNC button, so this is just for the bug (controls fast/slow)
+        {4, {"AP2", ""}},                                // unused?
+        {5, {"A/THR", "thranda/TMS/tmsPwrCmd"}},         // TMS on
+        {6, {"EXPED", ""}},                              // unused - TMS?
+        {7, {"METRIC", ""}},                             // unused
+        {8, {"APPR", "thranda/buttons/Button07"}},       // GSL button
+        {9, {"SPD DEC", "thranda/knob/RheostatDn104"}},  // SPD changed with SYNC button, so this is just for the bug (controls fast/slow)
         {10, {"SPD INC", "thranda/knob/RheostatUp104"}}, // "
-        {11, {"SPD PUSH", "thranda/buttons/Button16"}}, // IAS
-        {12, {"SPD PULL", "thranda/buttons/Button12"}}, // MACH
+        {11, {"SPD PUSH", "thranda/buttons/Button16"}},  // IAS
+        {12, {"SPD PULL", "thranda/buttons/Button12"}},  // MACH
         {13, {"HDG DEC", "sim/autopilot/heading_down"}},
         {14, {"HDG INC", "sim/autopilot/heading_up"}},
         {15, {"HDG PUSH", "thranda/buttons/Button14"}}, // LNAV
         {16, {"HDG PULL", "thranda/buttons/Button15"}}, // HDG
         {17, {"ALT DEC", "thranda/knob/RheostatDn15"}},
         {18, {"ALT INC", "thranda/knob/RheostatUp15"}},
-        {19, {"ALT PUSH", "sim/autopilot/altitude_arm"}}, // ALT ARM
-        {20, {"ALT PULL", "thranda/buttons/Button08"}}, // ALT mode
+        {19, {"ALT PUSH", "sim/autopilot/altitude_arm"}},       // ALT ARM
+        {20, {"ALT PULL", "thranda/buttons/Button08"}},         // ALT mode
         {21, {"VS DEC", "sim/autopilot/nose_down_pitch_mode"}}, // pitch down AP
         {22, {"VS INC", "sim/autopilot/nose_up_pitch_mode"}},
         {23, {"VS PUSH", "thranda/buttons/Button13"}}, // VNAV
         {24, {"VS PULL", "thranda/buttons/Button11"}}, // VS
-        {25, {"ALT 100", ""}}, // handle in code?
-        {26, {"ALT 1000", "",}},
+        {25, {"ALT 100", ""}},                         // handle in code?
+        {26, {
+                 "ALT 1000",
+                 "",
+             }},
 
         // Buttons 27-31 reserved
 
-        {32, {"L_FD", "custom"}}, // handle in code? Switch 92
+        {32, {"L_FD", "custom"}},                   // handle in code? Switch 92
         {33, {"L_LS", "thranda/buttons/Button06"}}, // V/L button
-        {34, {"L_CSTR", "thranda/TMS/toGaMode"}}, // TO mode
-        {35, {"L_WPT", "thranda/TMS/mctMode"}}, // MCT mode
-        {36, {"L_VOR.D", "thranda/TMS/tgtMode"}}, // TGT mode
-        {37, {"L_NDB", "thranda/TMS/descMode"}}, // DESC mode
-        {38, {"L_ARPT", "thranda/TMS/tmsSync"}}, // SYNC mode
+        {34, {"L_CSTR", "thranda/TMS/toGaMode"}},   // TO mode
+        {35, {"L_WPT", "thranda/TMS/mctMode"}},     // MCT mode
+        {36, {"L_VOR.D", "thranda/TMS/tgtMode"}},   // TGT mode
+        {37, {"L_NDB", "thranda/TMS/descMode"}},    // DESC mode
+        {38, {"L_ARPT", "thranda/TMS/tmsSync"}},    // SYNC mode
         {39, {"L_STD PUSH", "sim/instruments/barometer_2992"}},
         {40, {"L_STD PULL", ""}},
         // {41, {"L_PRESS DEC", "custom", FCUEfisDatarefType::BAROMETER_PILOT, -1.0}},
@@ -170,7 +169,7 @@ const std::unordered_map<uint16_t, FCUEfisButtonDef> &JF146FCUEfisProfile::butto
         {61, {"L_2 VOR", ""}},
         // Buttons 62-63 reserved
 
-        {64, {"R_FD", "custom"}}, // handle in code?
+        {64, {"R_FD", "custom"}},                   // handle in code?
         {65, {"R_LS", "thranda/buttons/Button06"}}, // V/L button
         {66, {"R_CSTR", ""}},
         {67, {"R_WPT", ""}},
@@ -243,7 +242,6 @@ void JF146FCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
         data.spdMach = false;
     }
 
-
     // Heading display
     float heading = Dataref::getInstance()->getCached<float>("sim/cockpit/autopilot/heading_mag");
     std::ostringstream headingSs;
@@ -275,9 +273,9 @@ void JF146FCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
 
     // Update Right EFIS LEDs from TCAS Annunciator array
     std::vector<float> tcasLights = Dataref::getInstance()->getCached<std::vector<float>>("thranda/TCAS/AnnLtA");
-    
+
     if (tcasLights.size() >= 376) {
-        auto product = dynamic_cast<ProductFCUEfis*>(this->product);
+        auto product = dynamic_cast<ProductFCUEfis *>(this->product);
         if (product) {
             // Right EFIS
             // ARPT: 362 || 363
@@ -322,15 +320,12 @@ void JF146FCUEfisProfile::buttonPressed(const FCUEfisButtonDef *button, XPLMComm
 
     auto datarefManager = Dataref::getInstance();
 
-    if ( button->name == "L_FD" && phase == xplm_CommandBegin) {
-
+    if (button->name == "L_FD" && phase == xplm_CommandBegin) {
         int isOn = Dataref::getInstance()->get<int>("thranda/autopilot/FD_Show_Pilot");
 
         isOn ? datarefManager->executeCommand("thranda/switches/SwitchDn92") : datarefManager->executeCommand("thranda/switches/SwitchUp92");
 
-
     } else if (button->name == "R_FD" && phase == xplm_CommandBegin) {
-
         int isOn = Dataref::getInstance()->get<int>("thranda/autopilot/FD_Show_CoPilot");
 
         isOn ? datarefManager->executeCommand("thranda/switches/SwitchDn76") : datarefManager->executeCommand("thranda/switches/SwitchUp76");
@@ -339,4 +334,3 @@ void JF146FCUEfisProfile::buttonPressed(const FCUEfisButtonDef *button, XPLMComm
         datarefManager->executeCommand(button->dataref.c_str());
     }
 }
-

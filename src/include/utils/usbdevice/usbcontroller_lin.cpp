@@ -26,13 +26,13 @@ static std::atomic<bool> shouldStopMonitoring{false};
 USBController::USBController() {
     struct udev *udev = udev_new();
     if (!udev) {
-        debug_force("Failed to create udev context");
+        Logger::getInstance()->error("Failed to create udev context");
         return;
     }
 
     hidManager = udev_monitor_new_from_netlink(udev, "udev");
     if (!hidManager) {
-        debug_force("Failed to create udev monitor");
+        Logger::getInstance()->error("Failed to create udev monitor");
         udev_unref(udev);
         return;
     }
@@ -178,7 +178,7 @@ void USBController::monitorDevices() {
             }
         }
     }
-    debug("Monitoring thread is exiting\n");
+    Logger::getInstance()->debug("Monitoring thread is exiting\n");
 }
 
 void USBController::DeviceAddedCallback(void *context, struct udev_device *device) {
