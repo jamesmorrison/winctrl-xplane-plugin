@@ -45,7 +45,7 @@ ZiboFMCProfile::ZiboFMCProfile(ProductFMC *product) : FMCAircraftProfile(product
 
     Dataref::getInstance()->monitorExistingDataref<bool>("laminar/B738/indicators/fmc_exec_lights", [product](bool enabled) {
         product->setLedBrightness(FMCLed::PFP_EXEC, enabled ? 1 : 0);
-        product->setLedBrightness(FMCLed::MCDU_RDY, enabled ? 1 : 0);
+        product->setLedBrightness(FMCLed::MCDU_STATUS, enabled ? 1 : 0);
     });
 }
 
