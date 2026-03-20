@@ -591,6 +591,26 @@ void ProductPAP3MCP::didReceiveData(int reportId, uint8_t *report, int reportLen
         buttonsHi |= ((uint32_t) report[i + 9]) << (8 * i);
     }
 
+    // Process encoder changes (bytes starting from offset 0x15) before the button early-return
+    // guard, otherwise encoder-only HID reports (no button state change) would be silently dropped.
+    {
+        const std::vector<PAP3MCPEncoderDef> &currentEncoderDefs = profile->encoderDefs();
+        static const uint8_t encoderOffsets[] = {0x15, 0x17, 0x19, 0x1B, 0x1D, 0x1F};
+        static uint8_t lastEncoderPos[6] = {0};
+
+        for (int i = 0; i < 6 && i < (int) currentEncoderDefs.size(); i++) {
+            if (encoderOffsets[i] < reportLength) {
+                uint8_t currentPos = report[encoderOffsets[i]];
+                int8_t delta = static_cast<int8_t>(currentPos - lastEncoderPos[i]);
+
+                if (delta != 0) {
+                    profile->encoderRotated(&currentEncoderDefs[i], delta);
+                    lastEncoderPos[i] = currentPos;
+                }
+            }
+        }
+    }
+
     if (buttonsLo == lastButtonStateLo && buttonsHi == lastButtonStateHi) {
         return;
     }
@@ -648,24 +668,6 @@ void ProductPAP3MCP::didReceiveData(int reportId, uint8_t *report, int reportLen
         }
     }
 
-    // Process encoder changes (bytes starting from offset 0x15)
-    const std::vector<PAP3MCPEncoderDef> &currentEncoderDefs = profile->encoderDefs();
-
-    // Encoder positions are at specific byte offsets (0x15, 0x17, 0x19, 0x1B, 0x1D, 0x1F)
-    static const uint8_t encoderOffsets[] = {0x15, 0x17, 0x19, 0x1B, 0x1D, 0x1F};
-    static uint8_t lastEncoderPos[6] = {0};
-
-    for (int i = 0; i < 6 && i < currentEncoderDefs.size(); i++) {
-        if (encoderOffsets[i] < reportLength) {
-            uint8_t currentPos = report[encoderOffsets[i]];
-            int8_t delta = static_cast<int8_t>(currentPos - lastEncoderPos[i]);
-
-            if (delta != 0) {
-                profile->encoderRotated(&currentEncoderDefs[i], delta);
-                lastEncoderPos[i] = currentPos;
-            }
-        }
-    }
 }
 
 void ProductPAP3MCP::didReceiveButton(uint16_t hardwareButtonIndex, bool pressed, uint8_t count) {
