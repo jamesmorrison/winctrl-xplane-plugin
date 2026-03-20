@@ -895,6 +895,8 @@
 					"XPLM400=1",
 					"XPLM410=1",
 					"XPLM420=1",
+					"XPLM421=1",
+					"XPLM430=1",
 					"DEBUG=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
@@ -966,6 +968,8 @@
 					"XPLM400=1",
 					"XPLM410=1",
 					"XPLM420=1",
+					"XPLM421=1",
+					"XPLM430=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				GCC_VERSION = "";
@@ -1280,6 +1284,8 @@
 					"XPLM400=1",
 					"XPLM410=1",
 					"XPLM420=1",
+					"XPLM421=1",
+					"XPLM430=1",
 					"DEBUG=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
