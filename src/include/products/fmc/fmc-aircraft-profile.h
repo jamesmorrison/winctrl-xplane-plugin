@@ -63,16 +63,21 @@ enum FMCTextColor : int {
 };
 
 struct FMCSpecialCharacter {
-        static constexpr std::array<uint8_t, 3> OUTLINED_SQUARE = {0xE2, 0x98, 0x90};    // U+2610
-        static constexpr std::array<uint8_t, 3> FILLED_ARROW_LEFT = {0xE2, 0x97, 0x80};  // // U+25C0
-        static constexpr std::array<uint8_t, 3> FILLED_ARROW_RIGHT = {0xE2, 0x96, 0xB6}; // U+25B6
-        static constexpr std::array<uint8_t, 3> ARROW_LEFT = {0xE2, 0x86, 0x90};         // U+2190
-        static constexpr std::array<uint8_t, 3> ARROW_RIGHT = {0xE2, 0x86, 0x92};        // U+2192
-        static constexpr std::array<uint8_t, 3> ARROW_UP = {0xE2, 0x86, 0x91};           // U+2191
-        static constexpr std::array<uint8_t, 3> ARROW_DOWN = {0xE2, 0x86, 0x93};         // U+2193
-        static constexpr std::array<uint8_t, 2> DEGREES = {0xC2, 0xB0};                  // U+00B0
-        static constexpr std::array<uint8_t, 2> TRIANGLE = {0xCE, 0x94};                 // U+0394
-        static constexpr std::array<uint8_t, 3> DIAMOND = {0xE2, 0xAC, 0xA1};            // U+2B21
+        static constexpr std::array<uint8_t, 3> WHITE_SQUARE = {0xE2, 0x96, 0xA1};          // U+25A1 WHITE SQUARE
+        static constexpr std::array<uint8_t, 3> BLACK_SQUARE = {0xE2, 0x96, 0xA0};          // U+25A0 BLACK SQUARE
+        static constexpr std::array<uint8_t, 3> OUTLINED_SQUARE = {0xE2, 0x98, 0x90};       // U+2610 BALLOT BOX
+        static constexpr std::array<uint8_t, 3> FILLED_SQUARE = {0xE2, 0x96, 0x88};         // U+2588 FULL BLOCK
+        static constexpr std::array<uint8_t, 3> FILLED_TRIANGLE_LEFT = {0xE2, 0x97, 0x80};  // U+25C0 BLACK LEFT-POINTING TRIANGLE
+        static constexpr std::array<uint8_t, 3> FILLED_TRIANGLE_RIGHT = {0xE2, 0x96, 0xB6}; // U+25B6 BLACK RIGHT-POINTING TRIANGLE
+        static constexpr std::array<uint8_t, 3> FILLED_TRIANGLE_UP = {0xE2, 0x96, 0xB2};    // U+25B2 BLACK UP-POINTING TRIANGLE
+        static constexpr std::array<uint8_t, 3> FILLED_TRIANGLE_DOWN = {0xE2, 0x96, 0xBC};  // U+25BC BLACK DOWN-POINTING TRIANGLE
+        static constexpr std::array<uint8_t, 3> ARROW_LEFT = {0xE2, 0x86, 0x90};            // U+2190 LEFTWARDS ARROW
+        static constexpr std::array<uint8_t, 3> ARROW_RIGHT = {0xE2, 0x86, 0x92};           // U+2192 RIGHTWARDS ARROW
+        static constexpr std::array<uint8_t, 3> ARROW_UP = {0xE2, 0x86, 0x91};              // U+2191 UPWARDS ARROW
+        static constexpr std::array<uint8_t, 3> ARROW_DOWN = {0xE2, 0x86, 0x93};            // U+2193 DOWNWARDS ARROW
+        static constexpr std::array<uint8_t, 2> DEGREES = {0xC2, 0xB0};                     // U+00B0 DEGREE SIGN
+        static constexpr std::array<uint8_t, 2> TRIANGLE = {0xCE, 0x94};                    // U+0394 GREEK CAPITAL LETTER DELTA
+        static constexpr std::array<uint8_t, 3> DIAMOND = {0xE2, 0xAC, 0xA1};               // U+2B21 WHITE HEXAGON
 };
 
 enum class FMCBackgroundVariant : unsigned char {

@@ -191,9 +191,9 @@ const std::map<char, FMCTextColor> &XCraftsFMCProfile::colorMap() const {
         {0x03, COLOR_YELLOW},
         {0x04, COLOR_MAGENTA},
         {0x05, COLOR_RED},
-        {0x06, COLOR_GREY},
+        {0x06, COLOR_LIGHTBROWN},
         {0x07, COLOR_AMBER},
-        {0x08, COLOR_DARKBROWN},
+        {0x08, COLOR_GREY},
 
         {0xF0, COLOR_WHITE_BG},
         {0xF1, COLOR_CYAN_BG},
@@ -203,15 +203,82 @@ const std::map<char, FMCTextColor> &XCraftsFMCProfile::colorMap() const {
         {0xF5, COLOR_RED_BG},
         {0xF6, COLOR_GREY_BG},
         {0xF7, COLOR_AMBER_BG},
-        {0xF8, COLOR_DARKBROWN_BG}};
+        {0xF8, COLOR_DARKBROWN_BG},
+    };
 
     return colors;
 }
 
 void XCraftsFMCProfile::mapCharacter(std::vector<uint8_t> *buffer, uint8_t character, bool isFontSmall) {
     switch (character) {
-        case '?':
+        case 'a': // THIN ARRW RT - Rightwards arrow
+            buffer->insert(buffer->end(), FMCSpecialCharacter::ARROW_RIGHT.begin(), FMCSpecialCharacter::ARROW_RIGHT.end());
+            break;
+
+        case 'b': // SLD ARRW BI - Black up-pointing triangle
+            buffer->insert(buffer->end(), FMCSpecialCharacter::FILLED_TRIANGLE_UP.begin(), FMCSpecialCharacter::FILLED_TRIANGLE_UP.end());
+            break;
+
+        case 'c': // TWIDDLE - @
+            buffer->push_back('@');
+            break;
+
+        case 'd': // DEGREES - Deg
+            buffer->insert(buffer->end(), FMCSpecialCharacter::DEGREES.begin(), FMCSpecialCharacter::DEGREES.end());
+            break;
+
+        case '\\':
+        case 'e': // BLOCK - Full block
+            buffer->insert(buffer->end(), FMCSpecialCharacter::FILLED_SQUARE.begin(), FMCSpecialCharacter::FILLED_SQUARE.end());
+            break;
+
+        case '$':
+        case 'g': // SLD ARRW LT - Black left-pointing triangle
+            buffer->insert(buffer->end(), FMCSpecialCharacter::FILLED_TRIANGLE_LEFT.begin(), FMCSpecialCharacter::FILLED_TRIANGLE_LEFT.end());
+            break;
+
+        case 'h': // OPEN BLK - White square
+            buffer->insert(buffer->end(), FMCSpecialCharacter::WHITE_SQUARE.begin(), FMCSpecialCharacter::WHITE_SQUARE.end());
+            break;
+
+        case 'k': // TURN KNOB NOCTR - Refresh right
+            buffer->insert(buffer->end(), FMCSpecialCharacter::TRIANGLE.begin(), FMCSpecialCharacter::TRIANGLE.end());
+            break;
+
+        case 'm': // THIN ARRW DN - Downwards arrow
+            buffer->insert(buffer->end(), FMCSpecialCharacter::ARROW_DOWN.begin(), FMCSpecialCharacter::ARROW_DOWN.end());
+            break;
+
+        case 'n': // TRUE DEGREES - Grave accent
+            buffer->push_back('`');
+            break;
+
+        case 'o': // EMPTY TICK CIRCLE - Ballot box
             buffer->insert(buffer->end(), FMCSpecialCharacter::OUTLINED_SQUARE.begin(), FMCSpecialCharacter::OUTLINED_SQUARE.end());
+            break;
+
+        case 'p': // GREEN FILLED TICK CIRCLE - White hexagon
+            buffer->insert(buffer->end(), FMCSpecialCharacter::DIAMOND.begin(), FMCSpecialCharacter::DIAMOND.end());
+            break;
+
+        case 'q': // THIN ARRW LT - Leftwards arrow
+            buffer->insert(buffer->end(), FMCSpecialCharacter::ARROW_LEFT.begin(), FMCSpecialCharacter::ARROW_LEFT.end());
+            break;
+
+        case 'r': // FILLED TICK CIRCLE - Black down-pointing triangle
+            buffer->insert(buffer->end(), FMCSpecialCharacter::FILLED_TRIANGLE_DOWN.begin(), FMCSpecialCharacter::FILLED_TRIANGLE_DOWN.end());
+            break;
+
+        case 's': // XPDR DOT - Black square
+            buffer->insert(buffer->end(), FMCSpecialCharacter::BLACK_SQUARE.begin(), FMCSpecialCharacter::BLACK_SQUARE.end());
+            break;
+
+        case 'u': // THIN ARRW UP - Upwards arrow
+            buffer->insert(buffer->end(), FMCSpecialCharacter::ARROW_UP.begin(), FMCSpecialCharacter::ARROW_UP.end());
+            break;
+
+        case 'v': // SLD ARRW RT - Black right-pointing triangle
+            buffer->insert(buffer->end(), FMCSpecialCharacter::FILLED_TRIANGLE_RIGHT.begin(), FMCSpecialCharacter::FILLED_TRIANGLE_RIGHT.end());
             break;
 
         default:
@@ -269,12 +336,18 @@ void XCraftsFMCProfile::updatePage(std::vector<std::vector<char>> &page) {
         if (text.size() > textStartIndex) {
             for (int j = textStartIndex; j < text.size() && (colIndex + (j - textStartIndex)) < ProductFMC::PageCharsPerLine; j++) {
                 unsigned char c = text[j];
-                if (c == 0x00) {
+                if (c == 0x00 || c == 0x0A || c == 0x0D) { // Null terminator or newline/carriage return, end of text
                     break;
                 }
 
                 int displayCol = colIndex + (j - textStartIndex);
                 bool isSmallFont = fontStyle == XCraftsFMCFontStyle::Small || fontStyle == XCraftsFMCFontStyle::SmallReversed || fontStyle == XCraftsFMCFontStyle::SmallReversedBox;
+
+                char existing = product->getPageCharacter(page, lineIndex, displayCol);
+                if (existing && c == 0x20) {
+                    continue;
+                }
+
                 product->writeLineToPage(page, lineIndex, displayCol, std::string(1, (char) c), colorCode, isSmallFont);
             }
         }
