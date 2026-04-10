@@ -97,7 +97,21 @@ const std::unordered_map<uint16_t, PAP3MCPButtonDef> &RotateMD11PAP3MCPProfile::
         {15, {"SPD INTV", "Rotate/aircraft/controls/fgs_spd_sel_mode", PAP3MCPDatarefType::SET_VALUE_PHASED, -1.0}},
 
         // Row 3 (byte 0x03)
-        {16, {"ALT INTV", "Rotate/aircraft/controls/fgs_alt_mode_sel", PAP3MCPDatarefType::SET_VALUE_PHASED, -1.0}}};
+        {16, {"ALT INTV", "Rotate/aircraft/controls/fgs_alt_mode_sel", PAP3MCPDatarefType::SET_VALUE_PHASED, -1.0}},
+
+        // Encoder rotations (exposed as button pairs by the hardware)
+        {17, {"CRS CAPT DEC", "sim/autopilot/heading_down"}},
+        {18, {"CRS CAPT INC", "sim/autopilot/heading_up"}},
+        {19, {"SPD DEC", "Rotate/aircraft/controls_c/fgs_spd_sel_dn"}},
+        {20, {"SPD INC", "Rotate/aircraft/controls_c/fgs_spd_sel_up"}},
+        {21, {"HDG DEC", "Rotate/aircraft/controls_c/fgs_hdg_sel_dn"}},
+        {22, {"HDG INC", "Rotate/aircraft/controls_c/fgs_hdg_sel_up"}},
+        {23, {"ALT DEC", "Rotate/aircraft/controls_c/fgs_alt_sel_dn"}},
+        {24, {"ALT INC", "Rotate/aircraft/controls_c/fgs_alt_sel_up"}},
+        {25, {"CRS FO DEC", "sim/autopilot/heading_down"}},
+        {26, {"CRS FO INC", "sim/autopilot/heading_up"}},
+        {38, {"VS DEC", "Rotate/aircraft/controls_c/fgs_pitch_sel_dn"}},
+        {39, {"VS INC", "Rotate/aircraft/controls_c/fgs_pitch_sel_up"}}};
     return buttons;
 }
 

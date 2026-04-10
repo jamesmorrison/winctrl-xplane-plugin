@@ -138,7 +138,17 @@ const std::unordered_map<uint16_t, PAP3MCPButtonDef> &FF777PAP3MCPProfile::butto
         {15, {"SPD INTV", "1-sim/command/mcpSpdRotary_push"}},     // SPD INTERV (SPD push)
 
         // Row 3 (byte 0x03)
-        {16, {"ALT INTV", "1-sim/command/mcpAltRotary_push"}}}; // ALT INTERV (ALT push)
+        {16, {"ALT INTV", "1-sim/command/mcpAltRotary_push"}}, // ALT INTERV (ALT push)
+
+        // Encoder rotations (exposed as button pairs by the hardware)
+        {19, {"SPD DEC", "1-sim/command/mcpSpdRotary_rotary-"}},
+        {20, {"SPD INC", "1-sim/command/mcpSpdRotary_rotary+"}},
+        {21, {"HDG DEC", "1-sim/command/mcpHdgRotary_rotary-"}},
+        {22, {"HDG INC", "1-sim/command/mcpHdgRotary_rotary+"}},
+        {23, {"ALT DEC", "1-sim/command/mcpAltRotary_rotary-"}},
+        {24, {"ALT INC", "1-sim/command/mcpAltRotary_rotary+"}},
+        {38, {"VS DEC", "1-sim/command/mcpVsRotary_rotary-"}},
+        {39, {"VS INC", "1-sim/command/mcpVsRotary_rotary+"}}}; // ALT INTERV (ALT push)
     return buttons;
 }
 

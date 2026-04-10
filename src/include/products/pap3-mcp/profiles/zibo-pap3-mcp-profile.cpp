@@ -210,7 +210,21 @@ const std::unordered_map<uint16_t, PAP3MCPButtonDef> &ZiboPAP3MCPProfile::button
         {15, {"SPD INTV", "laminar/B738/autopilot/spd_interv"}},
 
         // Row 3 (byte 0x03)
-        {16, {"ALT INTV", "laminar/B738/autopilot/alt_interv"}}};
+        {16, {"ALT INTV", "laminar/B738/autopilot/alt_interv"}},
+
+        // Encoder rotations (exposed as button pairs by the hardware)
+        {17, {"CRS CAPT DEC", "laminar/B738/autopilot/course_pilot_dn"}},
+        {18, {"CRS CAPT INC", "laminar/B738/autopilot/course_pilot_up"}},
+        {19, {"SPD DEC", "sim/autopilot/airspeed_down"}},
+        {20, {"SPD INC", "sim/autopilot/airspeed_up"}},
+        {21, {"HDG DEC", "laminar/B738/autopilot/heading_dn"}},
+        {22, {"HDG INC", "laminar/B738/autopilot/heading_up"}},
+        {23, {"ALT DEC", "laminar/B738/autopilot/altitude_dn"}},
+        {24, {"ALT INC", "laminar/B738/autopilot/altitude_up"}},
+        {25, {"CRS FO DEC", "laminar/B738/autopilot/course_copilot_dn"}},
+        {26, {"CRS FO INC", "laminar/B738/autopilot/course_copilot_up"}},
+        {38, {"VS DEC", "sim/autopilot/vertical_speed_down"}},
+        {39, {"VS INC", "sim/autopilot/vertical_speed_up"}}};
     return buttons;
 }
 

@@ -62,7 +62,21 @@ const std::unordered_map<uint16_t, PAP3MCPButtonDef> &LaminarPAP3MCPProfile::but
         {10, {"CMD A", "sim/autopilot/servos_on"}},
         {11, {"CWS A", "sim/autopilot/cwsa"}},
         {12, {"CMD B", "sim/autopilot/servos2_on"}},
-        {13, {"CWS B", "sim/autopilot/cwsb"}}};
+        {13, {"CWS B", "sim/autopilot/cwsb"}},
+
+        // Encoder rotations (exposed as button pairs by the hardware)
+        {17, {"CRS CAPT DEC", "sim/radios/obs1_down"}},
+        {18, {"CRS CAPT INC", "sim/radios/obs1_up"}},
+        {19, {"SPD DEC", "sim/autopilot/airspeed_down"}},
+        {20, {"SPD INC", "sim/autopilot/airspeed_up"}},
+        {21, {"HDG DEC", "sim/autopilot/heading_down"}},
+        {22, {"HDG INC", "sim/autopilot/heading_up"}},
+        {23, {"ALT DEC", "sim/autopilot/altitude_down"}},
+        {24, {"ALT INC", "sim/autopilot/altitude_up"}},
+        {25, {"CRS FO DEC", "sim/radios/obs2_down"}},
+        {26, {"CRS FO INC", "sim/radios/obs2_up"}},
+        {38, {"VS DEC", "sim/autopilot/vertical_speed_down"}},
+        {39, {"VS INC", "sim/autopilot/vertical_speed_up"}}};
     return buttons;
 }
 
