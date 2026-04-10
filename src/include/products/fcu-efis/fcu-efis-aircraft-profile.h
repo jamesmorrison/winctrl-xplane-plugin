@@ -53,6 +53,7 @@ enum class FCUEfisDatarefType : unsigned char {
     BAROMETER_PILOT,
     BAROMETER_FO,
     PUSH_BUTTON,
+    ADJUST_VALUE,
 };
 
 struct FCUEfisButtonDef {

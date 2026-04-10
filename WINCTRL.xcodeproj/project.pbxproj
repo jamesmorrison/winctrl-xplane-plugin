@@ -13,6 +13,8 @@
 		8321A6022ED27B1E00E3746A /* ff777-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8321A6012ED27B1E00E3746A /* ff777-fcu-efis-profile.cpp */; };
 		838AA8B52EEF2918006444F6 /* ff350-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 838AA8B42EEF2918006444F6 /* ff350-fcu-efis-profile.cpp */; };
 		F61F8B1E2D0456D700E63C3F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F66F91662D0332F600F84283 /* main.cpp */; };
+		F62002562F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F62002552F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp */; };
+		F62002572F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F62002552F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp */; };
 		F621F80C2F1C264A00DDB31E /* jf146-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F621F80B2F1C264A00DDB31E /* jf146-fcu-efis-profile.cpp */; };
 		F621F80D2F1C264A00DDB31E /* jf146-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F621F80B2F1C264A00DDB31E /* jf146-fcu-efis-profile.cpp */; };
 		F62C0A9D2F6D308900A66B1E /* c172-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F62C0A9C2F6D308900A66B1E /* c172-fcu-efis-profile.cpp */; };
@@ -141,6 +143,8 @@
 		838AA8B42EEF2918006444F6 /* ff350-fcu-efis-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ff350-fcu-efis-profile.cpp"; sourceTree = "<group>"; };
 		D607B19909A556E400699BC3 /* winctrl.xpl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = winctrl.xpl; sourceTree = BUILT_PRODUCTS_DIR; };
 		F61F8B2D2D059ED500E63C3F /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		F62002542F89129C0020E2AB /* xcrafts-fcu-efis-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "xcrafts-fcu-efis-profile.h"; sourceTree = "<group>"; };
+		F62002552F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "xcrafts-fcu-efis-profile.cpp"; sourceTree = "<group>"; };
 		F621F80A2F1C264A00DDB31E /* jf146-fcu-efis-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jf146-fcu-efis-profile.h"; sourceTree = "<group>"; };
 		F621F80B2F1C264A00DDB31E /* jf146-fcu-efis-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "jf146-fcu-efis-profile.cpp"; sourceTree = "<group>"; };
 		F62304282E59DF8500EE0089 /* vga_1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vga_1.h; sourceTree = "<group>"; };
@@ -504,6 +508,8 @@
 				F6C69C0D2EC0DAE300BFDA65 /* laminar737-fcu-efis-profile.cpp */,
 				F62C0A9B2F6D308900A66B1E /* c172-fcu-efis-profile.h */,
 				F62C0A9C2F6D308900A66B1E /* c172-fcu-efis-profile.cpp */,
+				F62002542F89129C0020E2AB /* xcrafts-fcu-efis-profile.h */,
+				F62002552F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp */,
 			);
 			path = profiles;
 			sourceTree = "<group>";
@@ -753,6 +759,7 @@
 				F67110DE2E5AF429008D493B /* font.cpp in Sources */,
 				F6C69C0E2EC0DAE300BFDA65 /* laminar737-fcu-efis-profile.cpp in Sources */,
 				F688808B2E523DE900B10AFA /* xcrafts-fmc-profile.cpp in Sources */,
+				F62002572F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp in Sources */,
 				F6BBFF0A2ED741B900FE9D7F /* rotatemd11-pap3-mcp-profile.cpp in Sources */,
 				F6EF56242F0AC43300AB61F1 /* zibo-pdc-profile.cpp in Sources */,
 				F6EF56252F0AC43300AB61F1 /* product-pdc.cpp in Sources */,
@@ -823,6 +830,7 @@
 				F69FF22E2E1D13CB00F9D2D9 /* DeviceModel.swift in Sources */,
 				F69FF22F2E1D13CB00F9D2D9 /* JoystickControlView.swift in Sources */,
 				F671B5DE2EA96BBE00141EF2 /* rotatemd11-fmc-profile.cpp in Sources */,
+				F62002562F89129C0020E2AB /* xcrafts-fcu-efis-profile.cpp in Sources */,
 				F67110DD2E5AF429008D493B /* font.cpp in Sources */,
 				F6E73EE12ED9CCA7000A8B6A /* product-ursa-minor-throttle.cpp in Sources */,
 				F6E73EE22ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.cpp in Sources */,
