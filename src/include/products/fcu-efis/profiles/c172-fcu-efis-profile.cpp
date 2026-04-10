@@ -21,10 +21,10 @@ C172FCUEfisProfile::C172FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraf
         product->setLedBrightness(FCUEfisLed::EXPED_BACKLIGHT, 0);
 
         product->setLedBrightness(FCUEfisLed::OVERALL_GREEN, target);
-        product->setLedBrightness(FCUEfisLed::EFISR_OVERALL_GREEN, target);
+        product->setLedBrightness(FCUEfisLed::EFISR_OVERALL_GREEN, 0);
         product->setLedBrightness(FCUEfisLed::EFISL_OVERALL_GREEN, target);
         product->setLedBrightness(FCUEfisLed::SCREEN_BACKLIGHT, target);
-        product->setLedBrightness(FCUEfisLed::EFISR_SCREEN_BACKLIGHT, target);
+        product->setLedBrightness(FCUEfisLed::EFISR_SCREEN_BACKLIGHT, 0);
         product->setLedBrightness(FCUEfisLed::EFISL_SCREEN_BACKLIGHT, target);
 
         product->forceStateSync();
@@ -38,6 +38,10 @@ C172FCUEfisProfile::C172FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraf
         product->setLedBrightness(FCUEfisLed::AP1_GREEN, isAutopilotEngaged ? 1 : 0);
     });
 
+    Dataref::getInstance()->monitorExistingDataref<int>("sim/cockpit2/autopilot/heading_mode", [this, product](int headingMode) {
+        product->setLedBrightness(FCUEfisLed::LOC_GREEN, headingMode == 2);
+    });
+
     Dataref::getInstance()->executeChangedCallbacksForDataref("sim/cockpit2/electrical/instrument_brightness_ratio_manual");
 }
 
@@ -47,6 +51,7 @@ C172FCUEfisProfile::~C172FCUEfisProfile() {
     Dataref::getInstance()->unbind("sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot");
     Dataref::getInstance()->unbind("sim/physics/metric_press");
     Dataref::getInstance()->unbind("sim/cockpit2/autopilot/servos_on");
+    Dataref::getInstance()->unbind("sim/cockpit2/autopilot/heading_mode");
 }
 
 bool C172FCUEfisProfile::IsEligible() {
@@ -56,13 +61,17 @@ bool C172FCUEfisProfile::IsEligible() {
 const std::vector<std::string> &C172FCUEfisProfile::displayDatarefs() const {
     static const std::vector<std::string> datarefs = {
         "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
+        "sim/cockpit2/autopilot/servos_on",
+        "sim/cockpit2/autopilot/heading_mode",
     };
     return datarefs;
 }
 
 const std::unordered_map<uint16_t, FCUEfisButtonDef> &C172FCUEfisProfile::buttonDefs() const {
     static const std::unordered_map<uint16_t, FCUEfisButtonDef> buttons = {
+        {1, {"LOC", "sim/GPS/g1000n3_nav"}},
         {3, {"AP", "sim/GPS/g1000n3_ap"}},
+        //{8, {"APPR", "sim/GPS/g1000n3_nav"}},
 
         {13, {"HDG DEC", "sim/autopilot/heading_down"}},
         {14, {"HDG INC", "sim/autopilot/heading_up"}},
@@ -74,6 +83,8 @@ const std::unordered_map<uint16_t, FCUEfisButtonDef> &C172FCUEfisProfile::button
 
         {21, {"VS DEC", "sim/GPS/g1000n3_nose_down"}},
         {22, {"VS INC", "sim/GPS/g1000n3_nose_up"}},
+        {23, {"VS PUSH", "sim/GPS/g1000n3_alt"}},
+        {24, {"VS PULL", "sim/GPS/g1000n3_vs"}},
 
         {25, {"ALT 100", "custom_set_altitude_mode", FCUEfisDatarefType::SET_VALUE, 100.0}},
         {26, {"ALT 1000", "custom_set_altitude_mode", FCUEfisDatarefType::SET_VALUE, 1000.0}},
@@ -83,6 +94,8 @@ const std::unordered_map<uint16_t, FCUEfisButtonDef> &C172FCUEfisProfile::button
 
         {43, {"L_inHg", "sim/physics/metric_press", FCUEfisDatarefType::SET_VALUE, 0.0}},
         {44, {"L_hPa", "sim/physics/metric_press", FCUEfisDatarefType::SET_VALUE, 1.0}},
+        //sim/GPS/g1000n3_vs
+        ///sim/GPS/g1000n3_nav
     };
 
     return buttons;
