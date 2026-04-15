@@ -1,14 +1,14 @@
-#include "product-ecam32.h"
+#include "product-ecam.h"
 
 #include "appstate.h"
 #include "dataref.h"
 #include "plugins-menu.h"
-#include "profiles/toliss-ecam32-profile.h"
+#include "profiles/toliss-ecam-profile.h"
 
 #include <algorithm>
 #include <cmath>
 
-ProductECAM32::ProductECAM32(HIDDeviceHandle hidDevice, uint16_t vendorId, uint16_t productId, std::string vendorName, std::string productName) : USBDevice(hidDevice, vendorId, productId, vendorName, productName) {
+ProductECAM::ProductECAM(HIDDeviceHandle hidDevice, uint16_t vendorId, uint16_t productId, std::string vendorName, std::string productName) : USBDevice(hidDevice, vendorId, productId, vendorName, productName) {
     lastButtonStateLo = 0;
     lastButtonStateHi = 0;
     pressedButtonIndices = {};
@@ -16,7 +16,7 @@ ProductECAM32::ProductECAM32(HIDDeviceHandle hidDevice, uint16_t vendorId, uint1
     connect();
 }
 
-ProductECAM32::~ProductECAM32() {
+ProductECAM::~ProductECAM() {
     blackout();
 
     PluginsMenu::getInstance()->removeItem(menuItemId);
@@ -27,13 +27,13 @@ ProductECAM32::~ProductECAM32() {
     }
 }
 
-const char *ProductECAM32::classIdentifier() {
-    return "ECAM32";
+const char *ProductECAM::classIdentifier() {
+    return "ECAM";
 }
 
-void ProductECAM32::setProfileForCurrentAircraft() {
-    if (TolissECAM32Profile::IsEligible()) {
-        profile = new TolissECAM32Profile(this);
+void ProductECAM::setProfileForCurrentAircraft() {
+    if (TolissECAMProfile::IsEligible()) {
+        profile = new TolissECAMProfile(this);
         profileReady = true;
     } else {
         profile = nullptr;
@@ -41,14 +41,14 @@ void ProductECAM32::setProfileForCurrentAircraft() {
     }
 }
 
-bool ProductECAM32::connect() {
+bool ProductECAM::connect() {
     if (!USBDevice::connect()) {
         return false;
     }
 
-    setLedBrightness(ECAM32Led::BACKLIGHT, 128);
-    setLedBrightness(ECAM32Led::EMER_CANC_BRIGHTNESS, 128);
-    setLedBrightness(ECAM32Led::OVERALL_LEDS_BRIGHTNESS, 255);
+    setLedBrightness(ECAMLed::BACKLIGHT, 128);
+    setLedBrightness(ECAMLed::EMER_CANC_BRIGHTNESS, 128);
+    setLedBrightness(ECAMLed::OVERALL_LEDS_BRIGHTNESS, 255);
     setAllLedsEnabled(false);
 
     setProfileForCurrentAircraft();
@@ -57,9 +57,9 @@ bool ProductECAM32::connect() {
         classIdentifier(),
         std::vector<MenuItem>{
             {.name = "Identify", .content = [this](int menuId) {
-                 setLedBrightness(ECAM32Led::BACKLIGHT, 128);
-                 setLedBrightness(ECAM32Led::EMER_CANC_BRIGHTNESS, 128);
-                 setLedBrightness(ECAM32Led::OVERALL_LEDS_BRIGHTNESS, 255);
+                 setLedBrightness(ECAMLed::BACKLIGHT, 128);
+                 setLedBrightness(ECAMLed::EMER_CANC_BRIGHTNESS, 128);
+                 setLedBrightness(ECAMLed::OVERALL_LEDS_BRIGHTNESS, 255);
                  setAllLedsEnabled(true);
                  AppState::getInstance()->executeAfter(2000, [this]() {
                      setAllLedsEnabled(false);
@@ -70,29 +70,29 @@ bool ProductECAM32::connect() {
     return true;
 }
 
-void ProductECAM32::blackout() {
-    setLedBrightness(ECAM32Led::BACKLIGHT, 0);
-    setLedBrightness(ECAM32Led::EMER_CANC_BRIGHTNESS, 0);
-    setLedBrightness(ECAM32Led::OVERALL_LEDS_BRIGHTNESS, 0);
+void ProductECAM::blackout() {
+    setLedBrightness(ECAMLed::BACKLIGHT, 0);
+    setLedBrightness(ECAMLed::EMER_CANC_BRIGHTNESS, 0);
+    setLedBrightness(ECAMLed::OVERALL_LEDS_BRIGHTNESS, 0);
 
     setAllLedsEnabled(false);
 }
 
-void ProductECAM32::setAllLedsEnabled(bool enable) {
-    unsigned char start = static_cast<unsigned char>(ECAM32Led::_START);
-    unsigned char end = static_cast<unsigned char>(ECAM32Led::_END);
+void ProductECAM::setAllLedsEnabled(bool enable) {
+    unsigned char start = static_cast<unsigned char>(ECAMLed::_START);
+    unsigned char end = static_cast<unsigned char>(ECAMLed::_END);
 
     for (unsigned char i = start; i <= end; ++i) {
-        ECAM32Led led = static_cast<ECAM32Led>(i);
+        ECAMLed led = static_cast<ECAMLed>(i);
         setLedBrightness(led, enable ? 1 : 0);
     }
 }
 
-void ProductECAM32::setLedBrightness(ECAM32Led led, uint8_t brightness) {
-    writeData({0x02, ProductECAM32::IdentifierByte, 0xBB, 0x00, 0x00, 0x03, 0x49, static_cast<uint8_t>(led), brightness, 0x00, 0x00, 0x00, 0x00, 0x00});
+void ProductECAM::setLedBrightness(ECAMLed led, uint8_t brightness) {
+    writeData({0x02, ProductECAM::IdentifierByte, 0xBB, 0x00, 0x00, 0x03, 0x49, static_cast<uint8_t>(led), brightness, 0x00, 0x00, 0x00, 0x00, 0x00});
 }
 
-void ProductECAM32::didReceiveData(int reportId, uint8_t *report, int reportLength) {
+void ProductECAM::didReceiveData(int reportId, uint8_t *report, int reportLength) {
     if (!connected || !profile || !report || reportLength <= 0) {
         return;
     }
@@ -130,7 +130,7 @@ void ProductECAM32::didReceiveData(int reportId, uint8_t *report, int reportLeng
     }
 }
 
-void ProductECAM32::didReceiveButton(uint16_t hardwareButtonIndex, bool pressed, uint8_t count) {
+void ProductECAM::didReceiveButton(uint16_t hardwareButtonIndex, bool pressed, uint8_t count) {
     USBDevice::didReceiveButton(hardwareButtonIndex, pressed, count);
 
     auto &buttons = profile->buttonDefs();
@@ -139,7 +139,7 @@ void ProductECAM32::didReceiveButton(uint16_t hardwareButtonIndex, bool pressed,
         return;
     }
 
-    const ECAM32ButtonDef *buttonDef = &it->second;
+    const ECAMButtonDef *buttonDef = &it->second;
 
     if (buttonDef->dataref.empty()) {
         return;

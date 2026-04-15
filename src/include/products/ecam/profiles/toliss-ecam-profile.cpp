@@ -1,20 +1,20 @@
-#include "toliss-ecam32-profile.h"
+#include "toliss-ecam-profile.h"
 
 #include "appstate.h"
 #include "dataref.h"
-#include "product-ecam32.h"
+#include "product-ecam.h"
 
 #include <algorithm>
 #include <cmath>
 
-TolissECAM32Profile::TolissECAM32Profile(ProductECAM32 *product) : ECAM32AircraftProfile(product) {
+TolissECAMProfile::TolissECAMProfile(ProductECAM *product) : ECAMAircraftProfile(product) {
     Dataref::getInstance()->monitorExistingDataref<float>("AirbusFBW/PanelBrightnessLevel", [product](float brightness) {
         bool hasPower = Dataref::getInstance()->get<bool>("sim/cockpit/electrical/avionics_on");
         bool ecpAvailable = Dataref::getInstance()->get<bool>("AirbusFBW/ECPAvail");
         uint8_t backlightBrightness = hasPower && ecpAvailable ? brightness * 255 : 0;
 
-        product->setLedBrightness(ECAM32Led::BACKLIGHT, backlightBrightness);
-        product->setLedBrightness(ECAM32Led::EMER_CANC_BRIGHTNESS, backlightBrightness);
+        product->setLedBrightness(ECAMLed::BACKLIGHT, backlightBrightness);
+        product->setLedBrightness(ECAMLed::EMER_CANC_BRIGHTNESS, backlightBrightness);
     });
 
     Dataref::getInstance()->monitorExistingDataref<bool>("sim/cockpit/electrical/avionics_on", [](bool poweredOn) {
@@ -32,38 +32,38 @@ TolissECAM32Profile::TolissECAM32Profile(ProductECAM32 *product) : ECAM32Aircraf
             return;
         }
 
-        product->setLedBrightness(ECAM32Led::ENG, panelLights[30] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::BLEED, panelLights[31] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::PRESS, panelLights[32] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::ELEC, panelLights[33] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::HYD, panelLights[34] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::FUEL, panelLights[35] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::ENG, panelLights[30] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::BLEED, panelLights[31] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::PRESS, panelLights[32] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::ELEC, panelLights[33] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::HYD, panelLights[34] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::FUEL, panelLights[35] ? 1 : 0);
 
-        product->setLedBrightness(ECAM32Led::APU, panelLights[36] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::COND, panelLights[37] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::DOOR, panelLights[38] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::WHEEL, panelLights[39] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::F_CTL, panelLights[40] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::APU, panelLights[36] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::COND, panelLights[37] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::DOOR, panelLights[38] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::WHEEL, panelLights[39] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::F_CTL, panelLights[40] ? 1 : 0);
 
-        product->setLedBrightness(ECAM32Led::STS, panelLights[41] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::CLR_LEFT, panelLights[42] ? 1 : 0);
-        product->setLedBrightness(ECAM32Led::CLR_RIGHT, panelLights[43] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::STS, panelLights[41] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::CLR_LEFT, panelLights[42] ? 1 : 0);
+        product->setLedBrightness(ECAMLed::CLR_RIGHT, panelLights[43] ? 1 : 0);
     });
 }
 
-TolissECAM32Profile::~TolissECAM32Profile() {
+TolissECAMProfile::~TolissECAMProfile() {
     Dataref::getInstance()->unbind("AirbusFBW/PanelBrightnessLevel");
     Dataref::getInstance()->unbind("sim/cockpit/electrical/avionics_on");
     Dataref::getInstance()->unbind("AirbusFBW/ECPAvail");
     Dataref::getInstance()->unbind("AirbusFBW/OHPLightsATA31_Raw");
 }
 
-bool TolissECAM32Profile::IsEligible() {
+bool TolissECAMProfile::IsEligible() {
     return Dataref::getInstance()->exists("AirbusFBW/PanelBrightnessLevel");
 }
 
-const std::unordered_map<uint16_t, ECAM32ButtonDef> &TolissECAM32Profile::buttonDefs() const {
-    static const std::unordered_map<uint16_t, ECAM32ButtonDef> buttons = {
+const std::unordered_map<uint16_t, ECAMButtonDef> &TolissECAMProfile::buttonDefs() const {
+    static const std::unordered_map<uint16_t, ECAMButtonDef> buttons = {
         {0, {"EMPTY 1", ""}},
         {1, {"TOCONFIG", "AirbusFBW/TOConfigPress"}},
         {2, {"EMPTY 2", ""}},
@@ -89,7 +89,7 @@ const std::unordered_map<uint16_t, ECAM32ButtonDef> &TolissECAM32Profile::button
     return buttons;
 }
 
-void TolissECAM32Profile::buttonPressed(const ECAM32ButtonDef *button, XPLMCommandPhase phase) {
+void TolissECAMProfile::buttonPressed(const ECAMButtonDef *button, XPLMCommandPhase phase) {
     if (!button || button->dataref.empty() || phase == xplm_CommandContinue) {
         return;
     }

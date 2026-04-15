@@ -1,12 +1,12 @@
-#ifndef PRODUCT_ECAM32_H
-#define PRODUCT_ECAM32_H
+#ifndef PRODUCT_ECAM_H
+#define PRODUCT_ECAM_H
 
-#include "ecam32-aircraft-profile.h"
+#include "ecam-aircraft-profile.h"
 #include "usbdevice.h"
 
 #include <set>
 
-enum class ECAM32Led : int {
+enum class ECAMLed : int {
     BACKLIGHT = 0,
     OVERALL_LEDS_BRIGHTNESS = 1,
     //UNUSED = 2,
@@ -30,9 +30,9 @@ enum class ECAM32Led : int {
     _END = 17,
 };
 
-class ProductECAM32 : public USBDevice {
+class ProductECAM : public USBDevice {
     private:
-        ECAM32AircraftProfile *profile;
+        ECAMAircraftProfile *profile;
         int menuItemId;
         uint64_t lastButtonStateLo;
         uint32_t lastButtonStateHi;
@@ -41,8 +41,8 @@ class ProductECAM32 : public USBDevice {
         void setProfileForCurrentAircraft();
 
     public:
-        ProductECAM32(HIDDeviceHandle hidDevice, uint16_t vendorId, uint16_t productId, std::string vendorName, std::string productName);
-        ~ProductECAM32();
+        ProductECAM(HIDDeviceHandle hidDevice, uint16_t vendorId, uint16_t productId, std::string vendorName, std::string productName);
+        ~ProductECAM();
 
         static constexpr unsigned char IdentifierByte = 0x70;
 
@@ -53,7 +53,7 @@ class ProductECAM32 : public USBDevice {
         void didReceiveButton(uint16_t hardwareButtonIndex, bool pressed, uint8_t count = 1) override;
 
         void setAllLedsEnabled(bool enabled);
-        void setLedBrightness(ECAM32Led led, uint8_t brightness);
+        void setLedBrightness(ECAMLed led, uint8_t brightness);
 };
 
 #endif

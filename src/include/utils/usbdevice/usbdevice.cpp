@@ -2,7 +2,7 @@
 
 #include "appstate.h"
 #include "product-agp.h"
-#include "product-ecam32.h"
+#include "product-ecam.h"
 #include "product-fcu-efis.h"
 #include "product-fmc.h"
 #include "product-pap3-mcp.h"
@@ -112,8 +112,8 @@ USBDevice *USBDevice::Device(HIDDeviceHandle hidDevice, uint16_t vendorId, uint1
             return new ProductPDC(hidDevice, vendorId, productId, vendorName, productName, PDCDeviceVariant::VARIANT_3M_FIRSTOFFICER, identifierByte);
         }
 
-        case 0xBB70: // ECAM32
-            return new ProductECAM32(hidDevice, vendorId, productId, vendorName, productName);
+        case 0xBB70: // ECAM
+            return new ProductECAM(hidDevice, vendorId, productId, vendorName, productName);
 
         case 0xBB80: // AGP
             return new ProductAGP(hidDevice, vendorId, productId, vendorName, productName);

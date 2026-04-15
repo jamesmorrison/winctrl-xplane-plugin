@@ -44,7 +44,7 @@ The matrix below shows device and aircraft compatibility. Devices are listed ver
 | **PFP 7**                   | 🟢          | 🟢           | 🔴          | 🟢               | 🟢                 | 🟢       | 🟢                   | 🔴                   | 🟠      | 🔴    |
 | **PAP3 / PAP3 Mag**         | 🔴          | 🔴           | 🔴          | 🔴               | 🟢                 | 🔴       | 🟢                   | 🔴                   | 🔴      | 🔴    |
 | **FCU and EFIS L+R**        | 🟢          | 🟢           | 🟠          | 🔴               | 🔴                 | 🔴       | 🟢                   | 🟢                   | 🔴      | 🟢    |
-| **ECAM32**                  | 🟢          | 🔴           | 🔴          | 🔴               | 🔴                 | 🔴       | 🔴                   | 🔴                   | 🔴      | 🔴    |
+| **ECAM**                    | 🟢          | 🔴           | 🔴          | 🔴               | 🔴                 | 🔴       | 🔴                   | 🔴                   | 🔴      | 🔴    |
 | **AGP**                     | 🟢          | 🔴           | 🔴          | 🔴               | 🔴                 | 🔴       | 🔴                   | 🔴                   | 🔴      | 🔴    |
 | **3N / 3M PDC**             | 🔴          | 🔴           | 🔴          | 🔴               | 🟢                 | 🔴       | 🟢                   | 🔴                   | 🔴      | 🔴    |
 
@@ -104,7 +104,7 @@ KERNEL=="hidraw*", ATTRS{idProduct}=="bc1e", ATTRS{idVendor}=="4098", MODE="0666
 KERNEL=="hidraw*", ATTRS{idProduct}=="bc1d", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-fcu-efis-l"
 KERNEL=="hidraw*", ATTRS{idProduct}=="ba01", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-fcu-efis-lr"
 KERNEL=="hidraw*", ATTRS{idProduct}=="bf0f", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-pap3"
-KERNEL=="hidraw*", ATTRS{idProduct}=="bb70", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-ecam32"
+KERNEL=="hidraw*", ATTRS{idProduct}=="bb70", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-ecam"
 KERNEL=="hidraw*", ATTRS{idProduct}=="bb80", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-agp"
 KERNEL=="hidraw*", ATTRS{idProduct}=="b920", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-throttle-l"
 KERNEL=="hidraw*", ATTRS{idProduct}=="b930", ATTRS{idVendor}=="4098", MODE="0666", SYMLINK+="winctrl-throttle-r"
