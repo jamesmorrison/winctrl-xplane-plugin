@@ -8,6 +8,7 @@
 #include "profiles/ff777-pap3-mcp-profile.h"
 #include "profiles/laminar-pap3-mcp-profile.h"
 #include "profiles/rotatemd11-pap3-mcp-profile.h"
+#include "profiles/xcrafts-pap3-mcp-profile.h"
 #include "profiles/zibo-pap3-mcp-profile.h"
 
 #include <algorithm>
@@ -46,6 +47,9 @@ ProductPAP3MCP::~ProductPAP3MCP() {
 void ProductPAP3MCP::setProfileForCurrentAircraft() {
     if (ZiboPAP3MCPProfile::IsEligible()) {
         profile = new ZiboPAP3MCPProfile(this);
+        profileReady = true;
+    } else if (XCraftsPAP3MCPProfile::IsEligible()) {
+        profile = new XCraftsPAP3MCPProfile(this);
         profileReady = true;
     } else if (FF777PAP3MCPProfile::IsEligible()) {
         profile = new FF777PAP3MCPProfile(this);

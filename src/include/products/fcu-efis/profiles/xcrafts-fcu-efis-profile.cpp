@@ -9,12 +9,8 @@
 #include <XPLMUtilities.h>
 
 XCraftsFCUEfisProfile::XCraftsFCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
-    Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](const std::vector<float> &brightness) {
-        if (brightness.size() < 2) {
-            return;
-        }
-
-        uint8_t target = static_cast<uint8_t>(brightness[1] * 255);
+    Dataref::getInstance()->monitorExistingDataref<float>("XCrafts/panel_brt_1", [product](float brightness) {
+        uint8_t target = static_cast<uint8_t>(brightness * 255);
         product->setLedBrightness(FCUEfisLed::BACKLIGHT, target);
         product->setLedBrightness(FCUEfisLed::EFISR_BACKLIGHT, target);
         product->setLedBrightness(FCUEfisLed::EFISL_BACKLIGHT, target);
@@ -37,12 +33,17 @@ XCraftsFCUEfisProfile::XCraftsFCUEfisProfile(ProductFCUEfis *product) : FCUEfisA
     Dataref::getInstance()->monitorExistingDataref<int>("XCrafts/ERJ/autothrottle_armed", [product](int armed) {
         product->setLedBrightness(FCUEfisLed::ATHR_GREEN, armed == 1 ? 1 : 0);
     });
+
+    Dataref::getInstance()->monitorExistingDataref<int>("XCrafts/ERJ/autopilot/autothrottle_system_active", [product](int active) {
+        product->setLedBrightness(FCUEfisLed::ATHR_GREEN, active == 1 ? 1 : 0);
+    });
 }
 
 XCraftsFCUEfisProfile::~XCraftsFCUEfisProfile() {
-    Dataref::getInstance()->unbind("sim/cockpit2/electrical/instrument_brightness_ratio_manual");
+    Dataref::getInstance()->unbind("XCrafts/panel_brt_1");
     Dataref::getInstance()->unbind("sim/cockpit/autopilot/autopilot_mode");
     Dataref::getInstance()->unbind("XCrafts/ERJ/autothrottle_armed");
+    Dataref::getInstance()->unbind("XCrafts/ERJ/autopilot/autothrottle_system_active");
 }
 
 bool XCraftsFCUEfisProfile::IsEligible() {
@@ -62,6 +63,7 @@ const std::vector<std::string> &XCraftsFCUEfisProfile::displayDatarefs() const {
 
         "sim/cockpit/autopilot/autopilot_mode",
         "XCrafts/ERJ/autothrottle_armed",
+        "XCrafts/ERJ/autopilot/autothrottle_system_active",
 
         "sim/cockpit2/gauges/actuators/barometer_setting_in_hg_pilot",
         "sim/physics/metric_press",
@@ -87,8 +89,8 @@ const std::unordered_map<uint16_t, FCUEfisButtonDef> &XCraftsFCUEfisProfile::but
         {16, {"HDG PULL", "sim/autopilot/heading"}},
         {17, {"ALT DEC", "XCrafts/ERJ/autopilot/altitude", FCUEfisDatarefType::ADJUST_VALUE, -100.0}},
         {18, {"ALT INC", "XCrafts/ERJ/autopilot/altitude", FCUEfisDatarefType::ADJUST_VALUE, 100.0}},
-        {19, {"ALT PUSH", "XCrafts/ERJ/alt_hold"}},
-        {20, {"ALT PULL", "XCrafts/ERJ/VS"}},
+        {19, {"ALT PUSH", "XCrafts/ERJ/VNAV"}},
+        {20, {"ALT PULL", "XCrafts/ERJ/FLCH"}},
         {21, {"VS DEC", "XCrafts/ERJ/autopilot/vertical_velocity", FCUEfisDatarefType::ADJUST_VALUE, -100.0}},
         {22, {"VS INC", "XCrafts/ERJ/autopilot/vertical_velocity", FCUEfisDatarefType::ADJUST_VALUE, 100.0}},
         {23, {"VS PUSH", "XCrafts/ERJ/alt_hold"}},
@@ -157,8 +159,9 @@ void XCraftsFCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
     // Altitude
     float altitude = dr->getCached<float>("XCrafts/ERJ/autopilot/altitude");
     if (altitude >= 0) {
+        int altInt = (static_cast<int>(altitude) / 100) * 100;
         std::stringstream ss;
-        ss << std::setfill('0') << std::setw(5) << static_cast<int>(altitude);
+        ss << std::setfill('0') << std::setw(5) << altInt;
         data.altitude = ss.str();
     } else {
         data.altitude = "-----";
@@ -166,7 +169,7 @@ void XCraftsFCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
 
     // Vertical speed
     float vs = dr->getCached<float>("XCrafts/ERJ/autopilot/vertical_velocity");
-    int vsInt = static_cast<int>(std::round(vs));
+    int vsInt = (static_cast<int>(vs) / 100) * 100;
     int absVs = std::abs(vsInt);
 
     std::stringstream vsSS;
@@ -241,7 +244,7 @@ void XCraftsFCUEfisProfile::buttonPressed(const FCUEfisButtonDef *button, XPLMCo
         int current = dr->get<int>(button->dataref.c_str());
         dr->set<int>(button->dataref.c_str(), current ? 0 : 1);
 
-    } else if (button->datarefType == FCUEfisDatarefType::EXECUTE_CMD_ONCE) {
-        dr->executeCommand(button->dataref.c_str(), phase);
+    } else if (phase == xplm_CommandBegin && button->datarefType == FCUEfisDatarefType::EXECUTE_CMD_ONCE) {
+        dr->executeCommand(button->dataref.c_str());
     }
 }

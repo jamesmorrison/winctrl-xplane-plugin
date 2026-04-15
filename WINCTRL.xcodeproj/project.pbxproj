@@ -34,6 +34,10 @@
 		F64BE3EB2E1BF625003C1B73 /* usbdevice_win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F64BE3E62E1BF625003C1B73 /* usbdevice_win.cpp */; };
 		F64BE3ED2E1BF625003C1B73 /* usbcontroller_win.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F64BE3E42E1BF625003C1B73 /* usbcontroller_win.cpp */; };
 		F64BE3EE2E1BF625003C1B73 /* usbcontroller_lin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F64BE3E32E1BF625003C1B73 /* usbcontroller_lin.cpp */; };
+		F6531CE42F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6531CE32F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp */; };
+		F6531CE52F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6531CE32F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp */; };
+		F6531CE82F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6531CE72F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp */; };
+		F6531CE92F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6531CE72F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp */; };
 		F67110DD2E5AF429008D493B /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F67110DC2E5AF429008D493B /* font.cpp */; };
 		F67110DE2E5AF429008D493B /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F67110DC2E5AF429008D493B /* font.cpp */; };
 		F671B5DE2EA96BBE00141EF2 /* rotatemd11-fmc-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F671B5DD2EA96BBE00141EF2 /* rotatemd11-fmc-profile.cpp */; };
@@ -109,10 +113,10 @@
 		F6CC2B4B2F0E4E5500C0A4D8 /* ff767-fcu-efis-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83124BCF2EE0A3D700C34D9D /* ff767-fcu-efis-profile.cpp */; };
 		F6CC2B4F2F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2B4E2F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp */; };
 		F6CC2B502F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6CC2B4E2F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp */; };
-		F6D8E6C72ED059390041C4FB /* product-ecam32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C52ED059390041C4FB /* product-ecam32.cpp */; };
-		F6D8E6C82ED059390041C4FB /* toliss-ecam32-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C12ED059390041C4FB /* toliss-ecam32-profile.cpp */; };
-		F6D8E6C92ED059390041C4FB /* product-ecam32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C52ED059390041C4FB /* product-ecam32.cpp */; };
-		F6D8E6CA2ED059390041C4FB /* toliss-ecam32-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C12ED059390041C4FB /* toliss-ecam32-profile.cpp */; };
+		F6D8E6C72ED059390041C4FB /* product-ecam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C52ED059390041C4FB /* product-ecam.cpp */; };
+		F6D8E6C82ED059390041C4FB /* toliss-ecam-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C12ED059390041C4FB /* toliss-ecam-profile.cpp */; };
+		F6D8E6C92ED059390041C4FB /* product-ecam.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C52ED059390041C4FB /* product-ecam.cpp */; };
+		F6D8E6CA2ED059390041C4FB /* toliss-ecam-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6D8E6C12ED059390041C4FB /* toliss-ecam-profile.cpp */; };
 		F6E73EE12ED9CCA7000A8B6A /* product-ursa-minor-throttle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6E73EDE2ED9CCA7000A8B6A /* product-ursa-minor-throttle.cpp */; };
 		F6E73EE22ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6E73EDB2ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.cpp */; };
 		F6E73EE32ED9CCA7000A8B6A /* product-ursa-minor-throttle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6E73EDE2ED9CCA7000A8B6A /* product-ursa-minor-throttle.cpp */; };
@@ -163,6 +167,10 @@
 		F64BE3E32E1BF625003C1B73 /* usbcontroller_lin.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = usbcontroller_lin.cpp; sourceTree = "<group>"; };
 		F64BE3E42E1BF625003C1B73 /* usbcontroller_win.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = usbcontroller_win.cpp; sourceTree = "<group>"; };
 		F64BE3E62E1BF625003C1B73 /* usbdevice_win.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = usbdevice_win.cpp; sourceTree = "<group>"; };
+		F6531CE22F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "xcrafts-pap3-mcp-profile.h"; sourceTree = "<group>"; };
+		F6531CE32F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "xcrafts-pap3-mcp-profile.cpp"; sourceTree = "<group>"; };
+		F6531CE62F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "xcrafts-ursa-minor-throttle-profile.h"; sourceTree = "<group>"; };
+		F6531CE72F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "xcrafts-ursa-minor-throttle-profile.cpp"; sourceTree = "<group>"; };
 		F66F91662D0332F600F84283 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		F67110DC2E5AF429008D493B /* font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font.cpp; sourceTree = "<group>"; };
 		F671B5DC2EA96BBE00141EF2 /* rotatemd11-fmc-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "rotatemd11-fmc-profile.h"; sourceTree = "<group>"; };
@@ -249,11 +257,11 @@
 		F6C6E02E2E8D5DAA00558F46 /* zibo-pap3-mcp-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "zibo-pap3-mcp-profile.cpp"; sourceTree = "<group>"; };
 		F6CC2B4D2F0E5F4B00C0A4D8 /* ff777-pdc-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ff777-pdc-profile.h"; sourceTree = "<group>"; };
 		F6CC2B4E2F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "ff777-pdc-profile.cpp"; sourceTree = "<group>"; };
-		F6D8E6C02ED059390041C4FB /* toliss-ecam32-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toliss-ecam32-profile.h"; sourceTree = "<group>"; };
-		F6D8E6C12ED059390041C4FB /* toliss-ecam32-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "toliss-ecam32-profile.cpp"; sourceTree = "<group>"; };
-		F6D8E6C32ED059390041C4FB /* ecam32-aircraft-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ecam32-aircraft-profile.h"; sourceTree = "<group>"; };
-		F6D8E6C42ED059390041C4FB /* product-ecam32.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "product-ecam32.h"; sourceTree = "<group>"; };
-		F6D8E6C52ED059390041C4FB /* product-ecam32.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "product-ecam32.cpp"; sourceTree = "<group>"; };
+		F6D8E6C02ED059390041C4FB /* toliss-ecam-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toliss-ecam-profile.h"; sourceTree = "<group>"; };
+		F6D8E6C12ED059390041C4FB /* toliss-ecam-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "toliss-ecam-profile.cpp"; sourceTree = "<group>"; };
+		F6D8E6C32ED059390041C4FB /* ecam-aircraft-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ecam-aircraft-profile.h"; sourceTree = "<group>"; };
+		F6D8E6C42ED059390041C4FB /* product-ecam.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "product-ecam.h"; sourceTree = "<group>"; };
+		F6D8E6C52ED059390041C4FB /* product-ecam.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "product-ecam.cpp"; sourceTree = "<group>"; };
 		F6E73EDA2ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toliss-ursa-minor-throttle-profile.h"; sourceTree = "<group>"; };
 		F6E73EDB2ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = "toliss-ursa-minor-throttle-profile.cpp"; sourceTree = "<group>"; };
 		F6E73EDD2ED9CCA7000A8B6A /* product-ursa-minor-throttle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "product-ursa-minor-throttle.h"; sourceTree = "<group>"; };
@@ -536,6 +544,8 @@
 				F6BBFF052ED741B900FE9D7F /* ff777-pap3-mcp-profile.cpp */,
 				F6BBFF062ED741B900FE9D7F /* rotatemd11-pap3-mcp-profile.h */,
 				F6BBFF072ED741B900FE9D7F /* rotatemd11-pap3-mcp-profile.cpp */,
+				F6531CE22F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.h */,
+				F6531CE32F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp */,
 			);
 			path = profiles;
 			sourceTree = "<group>";
@@ -543,21 +553,21 @@
 		F6D8E6C22ED059390041C4FB /* profiles */ = {
 			isa = PBXGroup;
 			children = (
-				F6D8E6C02ED059390041C4FB /* toliss-ecam32-profile.h */,
-				F6D8E6C12ED059390041C4FB /* toliss-ecam32-profile.cpp */,
+				F6D8E6C02ED059390041C4FB /* toliss-ecam-profile.h */,
+				F6D8E6C12ED059390041C4FB /* toliss-ecam-profile.cpp */,
 			);
 			path = profiles;
 			sourceTree = "<group>";
 		};
-		F6D8E6C62ED059390041C4FB /* ecam32 */ = {
+		F6D8E6C62ED059390041C4FB /* ecam */ = {
 			isa = PBXGroup;
 			children = (
-				F6D8E6C32ED059390041C4FB /* ecam32-aircraft-profile.h */,
+				F6D8E6C32ED059390041C4FB /* ecam-aircraft-profile.h */,
 				F6D8E6C22ED059390041C4FB /* profiles */,
-				F6D8E6C42ED059390041C4FB /* product-ecam32.h */,
-				F6D8E6C52ED059390041C4FB /* product-ecam32.cpp */,
+				F6D8E6C42ED059390041C4FB /* product-ecam.h */,
+				F6D8E6C52ED059390041C4FB /* product-ecam.cpp */,
 			);
-			path = ecam32;
+			path = ecam;
 			sourceTree = "<group>";
 		};
 		F6E73EDC2ED9CCA7000A8B6A /* profiles */ = {
@@ -569,6 +579,8 @@
 				F6AAEE212F261A790020CF32 /* zibo-ursa-minor-throttle-profile.cpp */,
 				F6E73EDA2ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.h */,
 				F6E73EDB2ED9CCA7000A8B6A /* toliss-ursa-minor-throttle-profile.cpp */,
+				F6531CE62F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.h */,
+				F6531CE72F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp */,
 			);
 			path = profiles;
 			sourceTree = "<group>";
@@ -621,7 +633,7 @@
 			isa = PBXGroup;
 			children = (
 				F6A77E712ED3514600061D03 /* agp */,
-				F6D8E6C62ED059390041C4FB /* ecam32 */,
+				F6D8E6C62ED059390041C4FB /* ecam */,
 				F6A1492E2E4F03A400FB8395 /* fmc */,
 				F6BB75772E32634700C2B21F /* fcu-efis */,
 				F6FC2A152E5C5377009A40E2 /* pap3-mcp */,
@@ -737,6 +749,7 @@
 				838AA8B52EEF2918006444F6 /* ff350-fcu-efis-profile.cpp in Sources */,
 				F62C0A9E2F6D308900A66B1E /* c172-fcu-efis-profile.cpp in Sources */,
 				F6C6E0342E8D5DAA00558F46 /* laminar-pap3-mcp-profile.cpp in Sources */,
+				F6531CE52F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp in Sources */,
 				F6C6E0352E8D5DAA00558F46 /* zibo-pap3-mcp-profile.cpp in Sources */,
 				F6A1493E2E4F04AE00FB8395 /* ssg748-fmc-profile.cpp in Sources */,
 				F6A1493F2E4F04AE00FB8395 /* ff777-fmc-profile.cpp in Sources */,
@@ -751,8 +764,8 @@
 				F6A77E722ED3514600061D03 /* toliss-agp-profile.cpp in Sources */,
 				F6FDC3D12F3E129F008E66F5 /* ff777-ursa-minor-joystick-profile.cpp in Sources */,
 				F6A77E732ED3514600061D03 /* product-agp.cpp in Sources */,
-				F6D8E6C92ED059390041C4FB /* product-ecam32.cpp in Sources */,
-				F6D8E6CA2ED059390041C4FB /* toliss-ecam32-profile.cpp in Sources */,
+				F6D8E6C92ED059390041C4FB /* product-ecam.cpp in Sources */,
+				F6D8E6CA2ED059390041C4FB /* toliss-ecam-profile.cpp in Sources */,
 				F67FE8142E895BAC00C4243C /* laminar-fcu-efis-profile.cpp in Sources */,
 				F635AD4A2E05819E005D6CDC /* usbdevice_mac.cpp in Sources */,
 				F647201F2E16CF6D00C9976B /* usbdevice.cpp in Sources */,
@@ -777,6 +790,7 @@
 				F6AF9ECC2D078ED400530297 /* appstate.cpp in Sources */,
 				F68428622EC6389D0027756D /* toliss-ursa-minor-joystick-profile.cpp in Sources */,
 				F6A1492F2E4F03A400FB8395 /* product-fmc.cpp in Sources */,
+				F6531CE82F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp in Sources */,
 				F6CC2B502F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp in Sources */,
 				F6A149302E4F03A400FB8395 /* toliss-fmc-profile.cpp in Sources */,
 				F6AAEE222F261A790020CF32 /* zibo-ursa-minor-throttle-profile.cpp in Sources */,
@@ -809,6 +823,7 @@
 				F6CC2B4F2F0E5F4B00C0A4D8 /* ff777-pdc-profile.cpp in Sources */,
 				F6BB75792E32634700C2B21F /* toliss-fcu-efis-profile.cpp in Sources */,
 				F63BC99A2E30D73E00ACBBB0 /* appstate.cpp in Sources */,
+				F6531CE92F8FD99C00FAC94D /* xcrafts-ursa-minor-throttle-profile.cpp in Sources */,
 				F64BE3EE2E1BF625003C1B73 /* usbcontroller_lin.cpp in Sources */,
 				F68428612EC6389D0027756D /* toliss-ursa-minor-joystick-profile.cpp in Sources */,
 				F68164E52E3161FD00319E9D /* usbcontroller.cpp in Sources */,
@@ -853,9 +868,10 @@
 				F6AAEE242F261A790020CF32 /* zibo-ursa-minor-throttle-profile.cpp in Sources */,
 				F6AAEE252F261A790020CF32 /* ff777-ursa-minor-throttle-profile.cpp in Sources */,
 				F621F80D2F1C264A00DDB31E /* jf146-fcu-efis-profile.cpp in Sources */,
+				F6531CE42F8FD99000FAC94D /* xcrafts-pap3-mcp-profile.cpp in Sources */,
 				F6F6F4EA2EBF976E00321C19 /* ButtonMapping.swift in Sources */,
-				F6D8E6C72ED059390041C4FB /* product-ecam32.cpp in Sources */,
-				F6D8E6C82ED059390041C4FB /* toliss-ecam32-profile.cpp in Sources */,
+				F6D8E6C72ED059390041C4FB /* product-ecam.cpp in Sources */,
+				F6D8E6C82ED059390041C4FB /* toliss-ecam-profile.cpp in Sources */,
 				F6C248472EBE498500617E89 /* plugins-menu.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

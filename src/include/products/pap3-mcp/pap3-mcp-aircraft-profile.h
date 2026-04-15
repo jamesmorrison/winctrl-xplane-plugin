@@ -41,6 +41,7 @@ enum PAP3MCPDatarefType : unsigned char {
     SET_VALUE,
     SET_VALUE_PHASED,
     TOGGLE_VALUE,
+    ADJUST_VALUE,
 };
 
 struct PAP3MCPButtonDef {

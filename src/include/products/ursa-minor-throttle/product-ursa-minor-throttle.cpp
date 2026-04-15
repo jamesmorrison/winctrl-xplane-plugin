@@ -5,6 +5,7 @@
 #include "plugins-menu.h"
 #include "profiles/ff777-ursa-minor-throttle-profile.h"
 #include "profiles/toliss-ursa-minor-throttle-profile.h"
+#include "profiles/xcrafts-ursa-minor-throttle-profile.h"
 #include "profiles/zibo-ursa-minor-throttle-profile.h"
 #include "segment-display.h"
 
@@ -37,6 +38,9 @@ const char *ProductUrsaMinorThrottle::classIdentifier() {
 void ProductUrsaMinorThrottle::setProfileForCurrentAircraft() {
     if (TolissUrsaMinorThrottleProfile::IsEligible()) {
         profile = new TolissUrsaMinorThrottleProfile(this);
+        profileReady = true;
+    } else if (XCraftsUrsaMinorThrottleProfile::IsEligible()) {
+        profile = new XCraftsUrsaMinorThrottleProfile(this);
         profileReady = true;
     } else if (FF777UrsaMinorThrottleProfile::IsEligible()) {
         profile = new FF777UrsaMinorThrottleProfile(this);
