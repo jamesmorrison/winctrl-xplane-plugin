@@ -1,4 +1,4 @@
-#include "laminar-airbus-fmc-profile.h"
+#include "laminar-a333-fmc-profile.h"
 
 #include "dataref.h"
 #include "product-fmc.h"
@@ -6,7 +6,7 @@
 #include <algorithm>
 #include <cstring>
 
-LaminarFMCProfile::LaminarFMCProfile(ProductFMC *product) : FMCAircraftProfile(product) {
+LaminarA333FMCProfile::LaminarA333FMCProfile(ProductFMC *product) : FMCAircraftProfile(product) {
     product->setAllLedsEnabled(false);
     product->setFont(FontVariant::FontAirbus);
 
@@ -28,16 +28,16 @@ LaminarFMCProfile::LaminarFMCProfile(ProductFMC *product) : FMCAircraftProfile(p
     product->setLedBrightness(FMCLed::SCREEN_BACKLIGHT, 128);
 }
 
-LaminarFMCProfile::~LaminarFMCProfile() {
+LaminarA333FMCProfile::~LaminarA333FMCProfile() {
     Dataref::getInstance()->unbind("sim/cockpit2/electrical/instrument_brightness_ratio_manual");
     Dataref::getInstance()->unbind("sim/cockpit/electrical/avionics_on");
 }
 
-bool LaminarFMCProfile::IsEligible() {
+bool LaminarA333FMCProfile::IsEligible() {
     return Dataref::getInstance()->exists("laminar/A333/ckpt_temp");
 }
 
-const std::vector<std::string> &LaminarFMCProfile::displayDatarefs() const {
+const std::vector<std::string> &LaminarA333FMCProfile::displayDatarefs() const {
     static std::unordered_map<FMCDeviceVariant, std::vector<std::string>> cache;
 
     return cache.try_emplace(FMCDeviceVariant::VARIANT_CAPTAIN,
@@ -62,7 +62,7 @@ const std::vector<std::string> &LaminarFMCProfile::displayDatarefs() const {
         .first->second;
 }
 
-const std::vector<FMCButtonDef> &LaminarFMCProfile::buttonDefs() const {
+const std::vector<FMCButtonDef> &LaminarA333FMCProfile::buttonDefs() const {
     static std::unordered_map<FMCDeviceVariant, std::vector<FMCButtonDef>> cache;
 
     return cache.try_emplace(FMCDeviceVariant::VARIANT_CAPTAIN,
@@ -145,7 +145,7 @@ const std::vector<FMCButtonDef> &LaminarFMCProfile::buttonDefs() const {
         .first->second;
 }
 
-const std::unordered_map<FMCKey, const FMCButtonDef *> &LaminarFMCProfile::buttonKeyMap() const {
+const std::unordered_map<FMCKey, const FMCButtonDef *> &LaminarA333FMCProfile::buttonKeyMap() const {
     static std::unordered_map<FMCDeviceVariant, std::unordered_map<FMCKey, const FMCButtonDef *>> cache;
 
     auto it = cache.find(product->deviceVariant);
@@ -170,7 +170,7 @@ const std::unordered_map<FMCKey, const FMCButtonDef *> &LaminarFMCProfile::butto
     return it->second;
 }
 
-const std::map<char, FMCTextColor> &LaminarFMCProfile::colorMap() const {
+const std::map<char, FMCTextColor> &LaminarA333FMCProfile::colorMap() const {
     static const std::map<char, FMCTextColor> colMap = {
         {0x00, FMCTextColor::COLOR_WHITE},
         {0x01, FMCTextColor::COLOR_CYAN},
@@ -180,7 +180,7 @@ const std::map<char, FMCTextColor> &LaminarFMCProfile::colorMap() const {
     return colMap;
 }
 
-void LaminarFMCProfile::mapCharacter(std::vector<uint8_t> *buffer, uint8_t character, bool isFontSmall) {
+void LaminarA333FMCProfile::mapCharacter(std::vector<uint8_t> *buffer, uint8_t character, bool isFontSmall) {
     switch (character) {
         case '#':
             buffer->insert(buffer->end(), FMCSpecialCharacter::OUTLINED_SQUARE.begin(), FMCSpecialCharacter::OUTLINED_SQUARE.end());
@@ -226,7 +226,7 @@ void LaminarFMCProfile::mapCharacter(std::vector<uint8_t> *buffer, uint8_t chara
     }
 }
 
-void LaminarFMCProfile::updatePage(std::vector<std::vector<char>> &page) {
+void LaminarA333FMCProfile::updatePage(std::vector<std::vector<char>> &page) {
     page = std::vector<std::vector<char>>(ProductFMC::PageLines, std::vector<char>(ProductFMC::PageCharsPerLine * ProductFMC::PageBytesPerChar, ' '));
 
     auto datarefManager = Dataref::getInstance();
@@ -284,6 +284,6 @@ void LaminarFMCProfile::updatePage(std::vector<std::vector<char>> &page) {
     }
 }
 
-void LaminarFMCProfile::buttonPressed(const FMCButtonDef *button, XPLMCommandPhase phase) {
+void LaminarA333FMCProfile::buttonPressed(const FMCButtonDef *button, XPLMCommandPhase phase) {
     Dataref::getInstance()->executeCommand(button->dataref.c_str(), phase);
 }

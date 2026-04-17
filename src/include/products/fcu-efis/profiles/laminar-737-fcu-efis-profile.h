@@ -1,5 +1,5 @@
-#ifndef LAMINAR737_FCU_EFIS_PROFILE_H
-#define LAMINAR737_FCU_EFIS_PROFILE_H
+#ifndef LAMINAR_737_FCU_EFIS_PROFILE_H
+#define LAMINAR_737_FCU_EFIS_PROFILE_H
 
 #include "fcu-efis-aircraft-profile.h"
 
@@ -30,4 +30,4 @@ class Laminar737FCUEfisProfile : public FCUEfisAircraftProfile {
         void buttonPressed(const FCUEfisButtonDef *button, XPLMCommandPhase phase) override;
 };
 
-#endif
+#endif // LAMINAR_737_FCU_EFIS_PROFILE_H

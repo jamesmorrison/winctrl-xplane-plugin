@@ -6,7 +6,7 @@
 #include "pap3-mcp-lcd-segments.h"
 #include "plugins-menu.h"
 #include "profiles/ff777-pap3-mcp-profile.h"
-#include "profiles/laminar-pap3-mcp-profile.h"
+#include "profiles/laminar-737-pap3-mcp-profile.h"
 #include "profiles/rotatemd11-pap3-mcp-profile.h"
 #include "profiles/xcrafts-pap3-mcp-profile.h"
 #include "profiles/zibo-pap3-mcp-profile.h"
@@ -57,8 +57,8 @@ void ProductPAP3MCP::setProfileForCurrentAircraft() {
     } else if (RotateMD11PAP3MCPProfile::IsEligible()) {
         profile = new RotateMD11PAP3MCPProfile(this);
         profileReady = true;
-    } else if (LaminarPAP3MCPProfile::IsEligible()) {
-        profile = new LaminarPAP3MCPProfile(this);
+    } else if (Laminar737PAP3MCPProfile::IsEligible()) {
+        profile = new Laminar737PAP3MCPProfile(this);
         profileReady = true;
     } else {
         profile = nullptr;

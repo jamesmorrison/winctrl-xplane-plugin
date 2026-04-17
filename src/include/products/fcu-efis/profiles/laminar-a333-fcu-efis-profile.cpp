@@ -1,4 +1,4 @@
-#include "laminar-fcu-efis-profile.h"
+#include "laminar-a333-fcu-efis-profile.h"
 
 #include "appstate.h"
 #include "dataref.h"
@@ -11,7 +11,7 @@
 #include <iomanip>
 #include <XPLMUtilities.h>
 
-LaminarFCUEfisProfile::LaminarFCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
+LaminarA333FCUEfisProfile::LaminarA333FCUEfisProfile(ProductFCUEfis *product) : FCUEfisAircraftProfile(product) {
     Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](const std::vector<float> &brightness) {
         if (brightness.size() < 2) {
             return;
@@ -123,7 +123,7 @@ LaminarFCUEfisProfile::LaminarFCUEfisProfile(ProductFCUEfis *product) : FCUEfisA
     });
 }
 
-LaminarFCUEfisProfile::~LaminarFCUEfisProfile() {
+LaminarA333FCUEfisProfile::~LaminarA333FCUEfisProfile() {
     Dataref::getInstance()->unbind("sim/cockpit2/electrical/instrument_brightness_ratio_manual");
     Dataref::getInstance()->unbind("sim/cockpit2/autopilot/autopilot_has_power");
 
@@ -154,12 +154,12 @@ LaminarFCUEfisProfile::~LaminarFCUEfisProfile() {
     Dataref::getInstance()->unbind("laminar/A333/annun/EFIS_capt_arpt");
 }
 
-bool LaminarFCUEfisProfile::IsEligible() {
+bool LaminarA333FCUEfisProfile::IsEligible() {
     bool eligible = Dataref::getInstance()->exists("laminar/A333/ckpt_temp");
     return eligible;
 }
 
-const std::vector<std::string> &LaminarFCUEfisProfile::displayDatarefs() const {
+const std::vector<std::string> &LaminarA333FCUEfisProfile::displayDatarefs() const {
     static const std::vector<std::string> datarefs = {
         "laminar/A333/annun/autopilot/ap1_mode",
         "laminar/A333/annun/autopilot/ap2_mode",
@@ -187,7 +187,7 @@ const std::vector<std::string> &LaminarFCUEfisProfile::displayDatarefs() const {
     return datarefs;
 }
 
-const std::unordered_map<uint16_t, FCUEfisButtonDef> &LaminarFCUEfisProfile::buttonDefs() const {
+const std::unordered_map<uint16_t, FCUEfisButtonDef> &LaminarA333FCUEfisProfile::buttonDefs() const {
     static const std::unordered_map<uint16_t, FCUEfisButtonDef> buttons = {
         {0, {"MACH", "sim/autopilot/knots_mach_toggle"}},
         {1, {"LOC", "sim/autopilot/NAV"}},
@@ -297,7 +297,7 @@ const std::unordered_map<uint16_t, FCUEfisButtonDef> &LaminarFCUEfisProfile::but
     return buttons;
 }
 
-void LaminarFCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
+void LaminarA333FCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
     auto datarefManager = Dataref::getInstance();
 
     data.spdManaged = datarefManager->getCached<bool>("sim/cockpit2/autopilot/vnav_speed_window_open") == false;
@@ -438,7 +438,7 @@ void LaminarFCUEfisProfile::updateDisplayData(FCUDisplayData &data) {
     }
 }
 
-void LaminarFCUEfisProfile::buttonPressed(const FCUEfisButtonDef *button, XPLMCommandPhase phase) {
+void LaminarA333FCUEfisProfile::buttonPressed(const FCUEfisButtonDef *button, XPLMCommandPhase phase) {
     if (!button || button->dataref.empty() || phase == xplm_CommandContinue) {
         return;
     }

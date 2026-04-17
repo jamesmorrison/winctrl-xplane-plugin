@@ -1,4 +1,4 @@
-#include "laminar-pap3-mcp-profile.h"
+#include "laminar-737-pap3-mcp-profile.h"
 
 #include "appstate.h"
 #include "dataref.h"
@@ -10,7 +10,7 @@
 #include <iomanip>
 #include <XPLMUtilities.h>
 
-LaminarPAP3MCPProfile::LaminarPAP3MCPProfile(ProductPAP3MCP *product) : PAP3MCPAircraftProfile(product) {
+Laminar737PAP3MCPProfile::Laminar737PAP3MCPProfile(ProductPAP3MCP *product) : PAP3MCPAircraftProfile(product) {
     Dataref::getInstance()->monitorExistingDataref<std::vector<float>>("sim/cockpit2/electrical/instrument_brightness_ratio_manual", [product](const std::vector<float> &brightness) {
         if (brightness.size() >= 16) {
             bool hasPower = Dataref::getInstance()->get<bool>("sim/cockpit2/autopilot/autopilot_has_power");
@@ -26,16 +26,16 @@ LaminarPAP3MCPProfile::LaminarPAP3MCPProfile(ProductPAP3MCP *product) : PAP3MCPA
     });
 }
 
-LaminarPAP3MCPProfile::~LaminarPAP3MCPProfile() {
+Laminar737PAP3MCPProfile::~Laminar737PAP3MCPProfile() {
     Dataref::getInstance()->unbind("sim/cockpit2/electrical/instrument_brightness_ratio_manual");
     Dataref::getInstance()->unbind("sim/cockpit2/autopilot/autopilot_has_power");
 }
 
-bool LaminarPAP3MCPProfile::IsEligible() {
+bool Laminar737PAP3MCPProfile::IsEligible() {
     return true;
 }
 
-const std::vector<std::string> &LaminarPAP3MCPProfile::displayDatarefs() const {
+const std::vector<std::string> &Laminar737PAP3MCPProfile::displayDatarefs() const {
     static std::vector<std::string> datarefs = {
         "sim/cockpit2/autopilot/airspeed_dial_kts_mach",
         "sim/cockpit/autopilot/heading_mag",
@@ -46,7 +46,7 @@ const std::vector<std::string> &LaminarPAP3MCPProfile::displayDatarefs() const {
     return datarefs;
 }
 
-const std::unordered_map<uint16_t, PAP3MCPButtonDef> &LaminarPAP3MCPProfile::buttonDefs() const {
+const std::unordered_map<uint16_t, PAP3MCPButtonDef> &Laminar737PAP3MCPProfile::buttonDefs() const {
     static const std::unordered_map<uint16_t, PAP3MCPButtonDef> buttons = {
         {0, {"N1", "sim/autopilot/FMS"}}, // N1 equivalent
         {1, {"SPEED", "sim/autopilot/autothrottle_on"}},
@@ -80,7 +80,7 @@ const std::unordered_map<uint16_t, PAP3MCPButtonDef> &LaminarPAP3MCPProfile::but
     return buttons;
 }
 
-const std::vector<PAP3MCPEncoderDef> &LaminarPAP3MCPProfile::encoderDefs() const {
+const std::vector<PAP3MCPEncoderDef> &Laminar737PAP3MCPProfile::encoderDefs() const {
     static std::vector<PAP3MCPEncoderDef> encoders = {
         {0, "CRS CAPT", "sim/radios/obs1_up", "sim/radios/obs1_down"},
         {1, "SPD", "sim/autopilot/airspeed_up", "sim/autopilot/airspeed_down"},
@@ -91,7 +91,7 @@ const std::vector<PAP3MCPEncoderDef> &LaminarPAP3MCPProfile::encoderDefs() const
     return encoders;
 }
 
-void LaminarPAP3MCPProfile::updateDisplayData(PAP3MCPDisplayData &data) {
+void Laminar737PAP3MCPProfile::updateDisplayData(PAP3MCPDisplayData &data) {
     // Use getCached() for performance
     auto dataref = Dataref::getInstance();
     data.speed = dataref->getCached<float>("sim/cockpit2/autopilot/airspeed_dial_kts_mach");
@@ -109,7 +109,7 @@ void LaminarPAP3MCPProfile::updateDisplayData(PAP3MCPDisplayData &data) {
     data.displayEnabled = dataref->getCached<bool>("sim/cockpit2/autopilot/autopilot_has_power");
 }
 
-void LaminarPAP3MCPProfile::buttonPressed(const PAP3MCPButtonDef *button, XPLMCommandPhase phase) {
+void Laminar737PAP3MCPProfile::buttonPressed(const PAP3MCPButtonDef *button, XPLMCommandPhase phase) {
     if (!button || button->dataref.empty()) {
         return;
     }
@@ -121,7 +121,7 @@ void LaminarPAP3MCPProfile::buttonPressed(const PAP3MCPButtonDef *button, XPLMCo
     }
 }
 
-void LaminarPAP3MCPProfile::encoderRotated(const PAP3MCPEncoderDef *encoder, int8_t delta) {
+void Laminar737PAP3MCPProfile::encoderRotated(const PAP3MCPEncoderDef *encoder, int8_t delta) {
     if (!encoder || delta == 0) {
         return;
     }

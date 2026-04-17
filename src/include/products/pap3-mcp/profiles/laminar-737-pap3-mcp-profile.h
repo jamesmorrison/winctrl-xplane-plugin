@@ -1,5 +1,5 @@
-#ifndef LAMINAR_PAP3MCP_PROFILE_H
-#define LAMINAR_PAP3MCP_PROFILE_H
+#ifndef LAMINAR737_PAP3MCP_PROFILE_H
+#define LAMINAR737_PAP3MCP_PROFILE_H
 
 #include "pap3-mcp-aircraft-profile.h"
 
@@ -7,10 +7,10 @@
 #include <string>
 #include <vector>
 
-class LaminarPAP3MCPProfile : public PAP3MCPAircraftProfile {
+class Laminar737PAP3MCPProfile : public PAP3MCPAircraftProfile {
     public:
-        LaminarPAP3MCPProfile(ProductPAP3MCP *product);
-        ~LaminarPAP3MCPProfile();
+        Laminar737PAP3MCPProfile(ProductPAP3MCP *product);
+        ~Laminar737PAP3MCPProfile();
 
         static bool IsEligible();
 
@@ -23,4 +23,4 @@ class LaminarPAP3MCPProfile : public PAP3MCPAircraftProfile {
         void encoderRotated(const PAP3MCPEncoderDef *encoder, int8_t delta) override;
 };
 
-#endif
+#endif // LAMINAR737_PAP3MCP_PROFILE_H

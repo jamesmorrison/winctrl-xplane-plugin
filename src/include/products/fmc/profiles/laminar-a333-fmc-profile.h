@@ -1,13 +1,13 @@
-#ifndef LAMINAR_AIRBUS_FMC_PROFILE_H
-#define LAMINAR_AIRBUS_FMC_PROFILE_H
+#ifndef LAMINAR_A333_FMC_PROFILE_H
+#define LAMINAR_A333_FMC_PROFILE_H
 
 #include "fmc-aircraft-profile.h"
 
-class LaminarFMCProfile : public FMCAircraftProfile {
+class LaminarA333FMCProfile : public FMCAircraftProfile {
     private:
     public:
-        LaminarFMCProfile(ProductFMC *product);
-        ~LaminarFMCProfile();
+        LaminarA333FMCProfile(ProductFMC *product);
+        ~LaminarA333FMCProfile();
 
         static bool IsEligible();
         const std::vector<std::string> &displayDatarefs() const override;
@@ -19,4 +19,4 @@ class LaminarFMCProfile : public FMCAircraftProfile {
         void buttonPressed(const FMCButtonDef *button, XPLMCommandPhase phase) override;
 };
 
-#endif
+#endif // LAMINAR_A333_FMC_PROFILE_H

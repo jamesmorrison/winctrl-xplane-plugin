@@ -1,4 +1,4 @@
-#include "laminar737-fcu-efis-profile.h"
+#include "laminar-737-fcu-efis-profile.h"
 
 #include "appstate.h"
 #include "dataref.h"

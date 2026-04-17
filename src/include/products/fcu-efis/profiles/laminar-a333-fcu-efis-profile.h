@@ -1,5 +1,5 @@
-#ifndef LAMINAR_FCU_EFIS_PROFILE_H
-#define LAMINAR_FCU_EFIS_PROFILE_H
+#ifndef LAMINAR_A333_FCU_EFIS_PROFILE_H
+#define LAMINAR_A333_FCU_EFIS_PROFILE_H
 
 #include "fcu-efis-aircraft-profile.h"
 
@@ -7,10 +7,10 @@
 #include <string>
 #include <vector>
 
-class LaminarFCUEfisProfile : public FCUEfisAircraftProfile {
+class LaminarA333FCUEfisProfile : public FCUEfisAircraftProfile {
     public:
-        LaminarFCUEfisProfile(ProductFCUEfis *product);
-        ~LaminarFCUEfisProfile();
+        LaminarA333FCUEfisProfile(ProductFCUEfis *product);
+        ~LaminarA333FCUEfisProfile();
 
         static bool IsEligible();
 
@@ -30,4 +30,4 @@ class LaminarFCUEfisProfile : public FCUEfisAircraftProfile {
         void buttonPressed(const FCUEfisButtonDef *button, XPLMCommandPhase phase) override;
 };
 
-#endif
+#endif // LAMINAR_A333_FCU_EFIS_PROFILE_H

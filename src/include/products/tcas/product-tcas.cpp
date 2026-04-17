@@ -32,7 +32,7 @@ ProductTCAS::~ProductTCAS() {
 }
 
 const char *ProductTCAS::classIdentifier() {
-    return "TCAS Panel";
+    return "TCAS";
 }
 
 void ProductTCAS::setProfileForCurrentAircraft() {

@@ -13,7 +13,7 @@ The plugin theoretically works on Windows, but is not required there, as WINCTRL
 4. Start X-Plane.
 5. Updating can be done by replacing the `winctrl` folder or using Skunkcrafts Updater if you have it installed.
 
-For linux, see the [Linux udev rules](#linux-udev-rules) section below to ensure proper permissions.
+For linux, see the [Linux udev rules](#linux-udev-rules) section below to ensure proper permissions and stable device recognition.
 
 ### Contributing
 
@@ -33,32 +33,21 @@ For linux, see the [Linux udev rules](#linux-udev-rules) section below to ensure
 ### Compatibility Matrix
 
 The matrix below shows device and aircraft compatibility. Devices are listed vertically, aircraft horizontally.
-
-| Device                      | Toliss A3xx | Laminar A330 | Laminar 737 | AeroGenesis A330 | Zibo / LevelUp 737 | IXEG 737 | FlightFactor 767/777 | FlightFactor A350 V1 | SSG 747 | JF146 |
-| --------------------------- | ----------- | ------------ | ----------- | ---------------- | ------------------ | -------- | -------------------- | -------------------- | ------- | ----- |
-| **URSA MINOR Joystick L+R** | 🟢          | 🟢           | 🔴          | 🟢               | 🟢                 | 🟢       | 🟢                   | 🔴                   | 🟢      | 🔴    |
-| **URSA MINOR Throttle**     | 🟢          | 🔴           | 🔴          | 🔴               | 🔴                 | 🔴       | 🔴                   | 🔴                   | 🔴      | 🔴    |
-| **MCDU-32**                 | 🟢          | 🟢           | 🔴          | 🟢               | 🟢                 | 🟢       | 🟢                   | 🔴                   | 🟠      | 🔴    |
-| **PFP 3N**                  | 🟢          | 🟢           | 🔴          | 🟢               | 🟢                 | 🟢       | 🟢                   | 🔴                   | 🟠      | 🔴    |
-| **PFP 4**                   | 🟢          | 🟢           | 🔴          | 🟢               | 🟢                 | 🟢       | 🟢                   | 🔴                   | 🟠      | 🔴    |
-| **PFP 7**                   | 🟢          | 🟢           | 🔴          | 🟢               | 🟢                 | 🟢       | 🟢                   | 🔴                   | 🟠      | 🔴    |
-| **PAP3 / PAP3 Mag**         | 🔴          | 🔴           | 🔴          | 🔴               | 🟢                 | 🔴       | 🟢                   | 🔴                   | 🔴      | 🔴    |
-| **FCU and EFIS L+R**        | 🟢          | 🟢           | 🟠          | 🔴               | 🔴                 | 🔴       | 🟢                   | 🟢                   | 🔴      | 🟢    |
-| **ECAM**                    | 🟢          | 🔴           | 🔴          | 🔴               | 🔴                 | 🔴       | 🔴                   | 🔴                   | 🔴      | 🔴    |
-| **AGP**                     | 🟢          | 🔴           | 🔴          | 🔴               | 🔴                 | 🔴       | 🔴                   | 🔴                   | 🔴      | 🔴    |
-| **3N / 3M PDC**             | 🔴          | 🔴           | 🔴          | 🔴               | 🟢                 | 🔴       | 🟢                   | 🔴                   | 🔴      | 🔴    |
-
-#### Legend
-
-- 🟢 **Fully implemented** - All features working
-- 🟠 **Partly implemented** - Some limitations or missing features
-- 🔴 **Not implemented** - No support
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Device&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ToLiss A3xx | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Zibo / LevelUp 737 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X-Crafts E-jets | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FlightFactor 767 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FlightFactor 777 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; FlightFactor A350 V1 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Rotate MD-11 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IXEG 737 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SSG 747 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; JustFlight 146 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Laminar 737 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Laminar A330 (Aerogenesis) | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Laminar C172 |
+|--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **URSA MINOR Airline Joystick L+R** | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; | &check; |
+| **FMC (MCDU, PFP 3N/4/7)** | &check; | &check; | &check; | &check; | &check; | &nbsp; | &check; | &check; | &check; | &nbsp; | &nbsp; | &check; | &nbsp; |
+| **3N PAP MCP** | &nbsp; | &check; | &check; | &nbsp; | &check; | &nbsp; | &check; | &nbsp; | &nbsp; | &nbsp; | &check; | &nbsp; | &nbsp; |
+| **3N / 3M PDC** | &nbsp; | &check; | &nbsp; | &nbsp; | &check; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| **FCU (+ optional EFIS L+R)** | &check; | &nbsp; | &check; | &check; | &check; | &check; | &nbsp; | &nbsp; | &nbsp; | &check; | &check; | &check; | &check; |
+| **32 ECAM** | &check; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| **32 AGP Metal** | &check; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
+| **URSA MINOR 32 Throttle Metal (+ optional 32 PAC Metal)** | &check; | &check; | &check; | &nbsp; | &check; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; | &nbsp; |
 
 ### Known Issues
 
-- 🟠 The SSG 747 does not expose any colour datarefs yet. Therefore, the PFP will not show the correct colours.
-- 🟠 The SSG 747 has a dual FMC, but the datarefs seem to overwrite eachother.
-- 🟠 Laminar 737: FCU is fully functional, but EFIS controls have not been tested yet.
+- The SSG 747 does not expose any colour datarefs yet. Therefore, the PFP will not show the correct colours.
+- The SSG 747 has a dual FMC, but the datarefs seem to overwrite eachother.
 
 ### Credits
 
@@ -120,3 +109,4 @@ Also see the [X-Plane.org forum thread](https://forums.x-plane.org/files/file/95
 
 <img src="https://github.com/user-attachments/assets/75d4e3e0-af9e-488f-bd5e-2d834bea110d" alt="Airbus A20N" width="256" />
 <img src="https://github.com/user-attachments/assets/8f5750e2-f913-479a-9f7a-6e3d6c31382d" alt="Boeing B738" width="256" />
+
